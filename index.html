@@ -1,0 +1,659 @@
+<!DOCTYPE html><html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horizon Droid</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #BB86FC;
+            --primary-variant: #3700B3;
+            --secondary: #03DAC6;
+            --background: #121212;
+            --surface: #1E1E1E;
+            --text: #FFFFFF;
+            --transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        [data-theme="light"] {
+            --background: #FFFFFF;
+            --surface: #F5F5F5;
+            --text: #121212;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: var(--transition);
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+            z-index: 1000;
+            background: var(--surface);
+            padding: 10px;
+            border-radius: 50%;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* Navigation */
+        .main-nav {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: var(--surface);
+            border: none;
+            color: var(--text);
+            padding: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 15px;
+            background: var(--surface);
+            padding: 15px 25px;
+            border-radius: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 1.1em;
+            padding: 8px 15px;
+            border-radius: 6px;
+            position: relative;
+        }
+
+        .nav-links a.active {
+            background: var(--primary-variant);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Mobile Navigation */
+        @media (max-width: 768px) {
+            .mobile-menu-btn { display: block; }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 60px;
+                right: 0;
+                flex-direction: column;
+                width: 200px;
+                border-radius: 15px;
+                padding: 15px;
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .nav-links a {
+                width: 100%;
+                text-align: center;
+                padding: 12px;
+            }
+        }
+
+        /* Sections */
+        section {
+            min-height: 100vh;
+            padding: 120px 20px 80px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s, transform 0.6s;
+            scroll-snap-align: start;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Headings */
+        .section-heading {
+            font-size: 2.8rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-heading::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), transparent);
+        }
+
+        /* Updated Carousel Styles */
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            margin: 0 auto;
+            max-width: 1200px;
+            padding: 0 40px;
+        }
+
+        .carousel {
+            display: flex;
+            scroll-behavior: smooth;
+            overflow-x: auto;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            gap: 15px;
+        }
+
+        .carousel::-webkit-scrollbar { 
+            display: none; 
+        }
+
+        .carousel-item {
+            flex: 0 0 calc(33.333% - 10px);
+            min-width: calc(33.333% - 10px);
+            padding: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .carousel img {
+            width: 100%;
+            height: 800px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            background: var(--surface);
+            transition: all 0.3s ease;
+        }
+
+        .carousel img:hover {
+            transform: scale(1.03);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .carousel-item {
+                flex: 0 0 calc(100% - 10px);
+                min-width: calc(50% - 10px);
+            }
+            
+            .carousel img {
+                height: 600px;
+            }
+            
+            .carousel-container {
+                padding: 0 20px;
+            }
+        }
+
+        /* Navigation Arrows */
+        .carousel-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--surface);
+            padding: 12px 15px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 100;
+            opacity: 0.9;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .carousel-nav:hover {
+            opacity: 1;
+            transform: translateY(-50%) scale(1.1);
+            background: var(--primary);
+            color: white;
+        }
+
+        .carousel-prev { left: 10px; }
+        .carousel-next { right: 10px; }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .carousel-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: var(--surface);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary-variant);
+        }
+
+        .carousel-dot.active {
+            background: var(--primary);
+            transform: scale(1.2);
+        }
+
+        /* Loading spinner */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid var(--primary);
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 10px;
+            vertical-align: middle;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes float {
+            0%,100%{ transform: translateY(0); }
+            50%{ transform: translateY(-10px); }
+        }
+
+        /* Feature Section */
+        .feature-section {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin-top: 2rem;
+        }
+
+        .feature-section img {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            animation: float 3.5s ease-in-out infinite;
+        }
+
+        pre {
+            background: var(--surface);
+            padding: 20px;
+            border-radius: 10px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            margin: 2rem 0;
+        }
+
+        hr {
+            border: 1px solid var(--primary);
+            margin: 40px 0;
+            opacity: 0.3;
+        }
+
+        .main-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .main-header img {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            filter: drop-shadow(0 0 5px var(--primary));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .button-link {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--text);
+            padding: 8px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            margin: 10px 0;
+            transition: all 0.3s ease;
+        }
+
+        .button-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(var(--primary), 0.4);
+        }
+    </style>
+</head>
+<body>
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" onclick="toggleTheme()">
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <button class="mobile-menu-btn" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </button>
+        <ul class="nav-links">
+            <li><a href="#home" class="active">Home</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#interface">Interface</a></li>
+            <li><a href="#changelog">Changelog</a></li>
+            <li><a href="#links">Links</a></li>
+            <li><a href="#faq">FAQ</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <!-- Home Section -->
+        <section id="home" class="visible">
+            <div class="main-header">
+                <h1 class="section-heading">Horizon Droid</h1>
+                <img src="img/logo.png" alt="logo">
+            </div>
+            <p><big><u>Far From Your Imagination</u></big></p>
+            <hr>
+            <p><big>Give yourself a better experience with a new life to your device.</big></p>
+            <p>Horizon Droid is optimized to run seamlessly on many android devices, giving you a clean experience.</p>
+            <hr>
+            <pre><big>Less <span class="loading"></span> 
+More Speed</big></pre>
+            <p>Your android should work as fast as you do. Horizon Droid runs lightning quick and doesn't slow down over time.</p>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features">
+            <h2 class="section-heading">Discover Features</h2>
+            <div class="feature-section">
+                <div>
+                    <p>A collection of thoughtfully curated features designed for everyday use, efficient, and never overwhelming. Just what you need.</p>
+                </div>
+                <img src="img/labs.png" alt="Features">
+            </div>
+        </section>
+
+        <!-- Interface Section -->
+        <section id="interface">
+            <h2 class="section-heading">Beautiful Interface</h2>
+            <p>Discover the seamless and visually stunning user interface that enhances your experience and captivates attention.
+            Our beautiful interface is crafted with precision and creativity to deliver an exceptional user journey!</p>
+            <div class="carousel-container">
+                <div class="carousel">
+                    <div class="carousel-item"><img src="img/UI (1).png" alt="IMG"></div>
+                    <div class="carousel-item"><img src="img/UI (2).png" alt="IMG"></div>
+                    <div class="carousel-item"><img src="img/UI (3).png" alt="IMG"></div>
+                    <div class="carousel-item"><img src="img/UI (4).png" alt="IMG"></div>
+                    <div class="carousel-item"><img src="img/UI (5).png" alt="IMG"></div>
+                    <div class="carousel-item"><img src="img/UI (6).png" alt="IMG"></div>
+                    <div class="carousel-item"><img src="img/UI (7).png" alt="IMG"></div>
+                    <div class="carousel-item"><img src="img/UI (8).png" alt="IMG"></div>
+                    <div class="carousel-item"><img src="img/UI (9).png" alt="IMG"></div>
+                    <div class="carousel-item"><img src="img/UI (10).png" alt="IMG"></div>
+                    <div class="carousel-item"><img src="img/UI (11).png" alt="IMG"></div>
+                    <div class="carousel-item"><img src="img/UI (12).png" alt="IMG"></div>
+                    <div class="carousel-item"><img src="img/UI (13).png" alt="IMG"></div>
+                    <div class="carousel-item"><img src="img/UI (14).png" alt="IMG"></div>
+                </div>
+                <div class="carousel-dots"></div>
+            </div>
+        </section>
+
+        <!-- Changelog Section -->
+        <section id="changelog">
+            <h2 class="section-heading">Latest Changelogs</h2>
+            <pre>
+
+★Changelog 03 May 2025
+- Fix clock seconds
+- Fix 4G Switch
+- Drop Pie Animation
+- Redesain Volume dialog changes
+- Add notchbarkiller
+- Add force enable LTE_CA
+- Add volume stream steps 
+- Add Data Switch QS Tile
+- Add tasks to recents
+- Add search bar style
+- Add integrate avatar inside A15-revamp search bar
+- Add Hide ADB and developer
+- Add Comss DNS provider
+- Add more DNS providers
+- Add hdr display
+
+★Changelog 24 April 2025 
+-Security Pacth April Qpr2
+-Integrate HorizonLab into Settings New implement
+-Integrate Omnijaws
+-Integrate Launcher3 
+-Redesign UDFPS icon
+-Redesign Brightness slider animation
+-Add GameSpace
+-Add P Animation
+-Add Flashlight Strength
+-Add Smartspace
+-Add Lockscreen Charging
+-Add restart SystemUI
+-Add Allow changing back gesture height
+-Add three finger gestures
+-Add Brightness TextView
+-Add New Taskbar Recent
+-Add Ongoing action chip toggle setting
+-Add AdGuard DNS as a private DNS Provider
+-Add Face Unlock with ParanoidSense
+-Add Support for application downgrade
+-Add Support for window ignore secure
+-Add Screen off animations
+-Add Notification counters
+-Add Ions for notifications in statusbar
+-Add Show daily data usage in QS footer
+-Add wifi standard icon feature
+-Introduce Reality Display engine
+-Introduce PropImitationHooks
+-Import illustrations
+
+Wanna Build?  <a href="https://github.com/HorizonV2" class="button-link">Here</a>
+
+Happy building have a nice day. </pre>
+        </section>
+
+        <!-- Links Section -->
+        <section id="links">
+            <h3 class="section-heading">Links</h3>
+            <p>Looking for Updates? <a href="https://t.me/horizondroidnews" class="button-link">Here</a> you go.</p>
+            <pre>Found a bug?
+
+Don't worry, Just report <a href="https://t.me/horizondroidchatroom" class="button-link">here</a> Try not to forget the logs tho!</pre>
+            <p>Need help in building, Try <a href="https://t.me/horizonbuilders" class="button-link">here</a></p>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq">
+            <h4 class="section-heading">Frequently Asked Questions</h4>
+            <p><big>Q. Can you add Feature XY</big></p>
+            <p>We welcome suggestions, but only if they are useful and non-intrusive.</p>
+            <hr>
+            <p><big>Q. Is battery life good on HorizonDroid?</big></p>
+            <p>Battery life depends on factors like kernel, usage, and configuration. HorizonDroid includes efficiency optimizations.</p>
+        </section>
+    </main>
+
+    <script>
+        // Theme Toggle
+        function toggleTheme() {
+            const body = document.body;
+            const themeToggle = document.querySelector('.theme-toggle i');
+            const newTheme = body.dataset.theme === 'dark' ? 'light' : 'dark';
+            body.dataset.theme = newTheme;
+            themeToggle.classList.toggle('fa-moon');
+            themeToggle.classList.toggle('fa-sun');
+            localStorage.setItem('theme', newTheme);
+        }
+        
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        document.body.dataset.theme = savedTheme;
+        document.querySelector('.theme-toggle i')
+            .classList.add(savedTheme === 'dark' ? 'fa-moon' : 'fa-sun');
+
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', e => {
+            const nav = document.querySelector('.nav-links');
+            const btn = document.querySelector('.mobile-menu-btn');
+            if (!nav.contains(e.target) && !btn.contains(e.target)) {
+                nav.classList.remove('active');
+            }
+        });
+
+        // Carousel Implementation
+        let autoSlideInterval;
+        let currentSlide = 0;
+
+        function initCarousel() {
+            const carousel = document.querySelector('.carousel');
+            const dotsContainer = document.querySelector('.carousel-dots');
+            const items = carousel.children;
+            
+            // Create navigation arrows
+            const prevArrow = document.createElement('div');
+            prevArrow.className = 'carousel-nav carousel-prev';
+            prevArrow.innerHTML = '<i class="fas fa-chevron-left"></i>';
+            prevArrow.onclick = () => navigate(-1);
+            
+            const nextArrow = document.createElement('div');
+            nextArrow.className = 'carousel-nav carousel-next';
+            nextArrow.innerHTML = '<i class="fas fa-chevron-right"></i>';
+            nextArrow.onclick = () => navigate(1);
+            
+            carousel.parentElement.appendChild(prevArrow);
+            carousel.parentElement.appendChild(nextArrow);
+
+            // Create dots based on visible slides
+            const totalSlides = Math.ceil(items.length / getVisibleSlides());
+            dotsContainer.innerHTML = '';
+            for(let i = 0; i < totalSlides; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'carousel-dot';
+                dot.onclick = () => goToSlide(i);
+                dotsContainer.appendChild(dot);
+            }
+
+            // Initialize auto-slide
+            startAutoSlide();
+            updateDots();
+
+            // Handle window resize
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    currentSlide = 0;
+                    initCarousel();
+                }, 250);
+            });
+
+            // Pause on hover
+            carousel.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
+            carousel.addEventListener('mouseleave', startAutoSlide);
+        }
+
+        function getVisibleSlides() {
+            return window.innerWidth > 768 ? 3 : 2;
+        }
+
+        function navigate(direction) {
+            const visibleSlides = getVisibleSlides();
+            const totalSlides = Math.ceil(document.querySelectorAll('.carousel-item').length / visibleSlides);
+            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+            goToSlide(currentSlide);
+        }
+
+        function goToSlide(index) {
+            const carousel = document.querySelector('.carousel');
+            const itemWidth = document.querySelector('.carousel-item').offsetWidth;
+            currentSlide = index;
+            carousel.scrollTo({
+                left: index * (itemWidth + 15) * getVisibleSlides(),
+                behavior: 'smooth'
+            });
+            updateDots();
+        }
+
+        function updateDots() {
+            const dots = document.querySelectorAll('.carousel-dot');
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentSlide);
+            });
+        }
+
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(() => navigate(1), 5000);
+        }
+
+        // Initialize when DOM is loaded
+        window.addEventListener('DOMContentLoaded', () => {
+            initCarousel();
+            
+            // Intersection Observer for sections
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        const id = entry.target.id;
+                        document.querySelectorAll('.nav-links a')
+                            .forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${id}`));
+                    }
+                });
+            }, { threshold: 0.25, rootMargin: '0px 0px -150px 0px' });
+            
+            document.querySelectorAll('section').forEach(s => observer.observe(s));
+
+            // Smooth scroll for internal links
+            document.querySelectorAll('a[href^="#"]').forEach(a => {
+                a.addEventListener('click', e => {
+                    e.preventDefault();
+                    document.querySelector(a.getAttribute('href'))
+                        .scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            });
+        });
+    </script>
+</body>
+</html>
