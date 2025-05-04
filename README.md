@@ -21,7 +21,7 @@ Inside **HorizonLabs**, you can find all your needed features.
 
 * [**Telegram Channel**](https://t.me/horizondroid)
 * [**Telegram Group**](https://t.me/HorizonDroidChat)
-* [**Website**](https://glitch-wraith.github.io/ota-pipa.github.io/)
+* [**Website**](https://horizonv2.github.io/HorizonDroid.github.io/)
 
 
 -----------------------------------------------------------------------------
