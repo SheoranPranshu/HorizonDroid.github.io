@@ -354,6 +354,43 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 15px rgba(var(--primary), 0.4);
         }
+
+        .modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* dim background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background-color: #1e1e1e;
+  color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+        .close-button {
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  color: #fff;
+}
+        
     </style>
 </head>
 <body>
@@ -433,6 +470,10 @@ More Speed</big></pre>
 
         <!-- Changelog Section -->
         <section id="changelog">
+            <div id="changelog-modal" class="modal">
+                 <div class="modal-content">
+                      <span class="close-button" 
+                          onclick="closeChangelogModal()">&times;</span>
             <h2 class="section-heading">Latest Changelogs</h2>
             <pre>
 ★HorizonDroid Alpha Android 15 presents: "Earth”
@@ -514,6 +555,8 @@ More Speed</big></pre>
 Wanna Build?  <a href="https://github.com/HorizonV2" class="button-link">Here</a>
 
 Happy building have a nice day. </pre>
+             </div>
+            </div>
         </section>
 
         <!-- Links Section -->
@@ -538,6 +581,11 @@ Don't worry, Just report <a href="https://t.me/horizondroidchatroom" class="butt
     </main>
 
     <script>
+
+        function closeChangelogModal() {
+  document.getElementById('changelog-modal').style.display = 'none';
+        }
+        
         // Theme Toggle
         function toggleTheme() {
             const body = document.body;
