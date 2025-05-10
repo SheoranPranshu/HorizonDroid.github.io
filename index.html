@@ -581,23 +581,6 @@ Don't worry, Just report <a href="https://t.me/horizondroidchatroom" class="butt
     </main>
 
     <script>
-        
-        <!-- Add an event listener to show the modal when clicking on the changelog link -->
-            
-    document.querySelector('a[href="#changelog"]').addEventListener('click', function(event) {
-        event.preventDefault();  // Prevent the default anchor link behavior
-        document.getElementById('changelog-modal').style.display = 'flex'; // Show modal
-    });
-
-    function closeChangelogModal() {
-        document.getElementById('changelog-modal').style.display = 'none'; // Close modal
-    }
-
-    // Optionally, close the modal when clicking outside the modal content
-    document.getElementById('changelog-modal').addEventListener('click', function(event) {
-        if (event.target === this) {
-            closeChangelogModal();
-        }
 
         function closeChangelogModal() {
   document.getElementById('changelog-modal').style.display = 'none';
@@ -747,5 +730,25 @@ Don't worry, Just report <a href="https://t.me/horizondroidchatroom" class="butt
             });
         });
     </script>
+    <!-- Add an event listener to show the modal when clicking on the changelog link -->
+<script>
+    document.querySelector('a[href="#changelog"]').addEventListener('click', function(event) {
+        event.preventDefault();  // Prevent the default anchor link behavior
+        document.getElementById('changelog-modal').style.display = 'flex'; // Show modal
+    });
+
+    function closeChangelogModal() {
+        document.getElementById('changelog-modal').style.display = 'none'; // Close modal
+    }
+
+    // Optionally, close the modal when clicking outside the modal content
+    document.getElementById('changelog-modal').addEventListener('click', function(event) {
+        if (event.target === this) {
+            closeChangelogModal();
+        }
+    });
+</script>
+
+    
 </body>
 </html>
