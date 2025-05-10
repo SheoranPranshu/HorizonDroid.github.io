@@ -379,17 +379,6 @@
   max-height: 90vh;
   overflow-y: auto;
 }
-        .close-button {
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  color: #aaa;
-  cursor: pointer;
-}
-
-.close-button:hover {
-  color: #fff;
-}
         
     </style>
 </head>
@@ -472,8 +461,6 @@ More Speed</big></pre>
         <section id="changelog">
             <div id="changelog-modal" class="modal">
                  <div class="modal-content">
-                      <span class="close-button" 
-                          onclick="closeChangelogModal()">&times;</span>
             <h2 class="section-heading">Latest Changelogs</h2>
             <pre>
 ★HorizonDroid Alpha Android 15 presents: "Earth”
@@ -581,10 +568,6 @@ Don't worry, Just report <a href="https://t.me/horizondroidchatroom" class="butt
     </main>
 
     <script>
-
-        function closeChangelogModal() {
-  document.getElementById('changelog-modal').style.display = 'none';
-        }
         
         // Theme Toggle
         function toggleTheme() {
@@ -730,25 +713,6 @@ Don't worry, Just report <a href="https://t.me/horizondroidchatroom" class="butt
             });
         });
     </script>
-    <!-- Add an event listener to show the modal when clicking on the changelog link -->
-<script>
-    document.querySelector('a[href="#changelog"]').addEventListener('click', function(event) {
-        event.preventDefault();  // Prevent the default anchor link behavior
-        document.getElementById('changelog-modal').style.display = 'flex'; // Show modal
-    });
-
-    function closeChangelogModal() {
-        document.getElementById('changelog-modal').style.display = 'none'; // Close modal
-    }
-
-    // Optionally, close the modal when clicking outside the modal content
-    document.getElementById('changelog-modal').addEventListener('click', function(event) {
-        if (event.target === this) {
-            closeChangelogModal();
-        }
-    });
-</script>
-
     
 </body>
 </html>
