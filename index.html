@@ -354,6 +354,32 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 15px rgba(var(--primary), 0.4);
         }
+
+        .modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* dim background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background-color: #1e1e1e;
+  color: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+        
     </style>
 </head>
 <body>
@@ -433,10 +459,37 @@ More Speed</big></pre>
 
         <!-- Changelog Section -->
         <section id="changelog">
+            <div id="changelog-modal" class="modal">
+                 <div class="modal-content">
             <h2 class="section-heading">Latest Changelogs</h2>
             <pre>
+★HorizonDroid Alpha Android 15 presents: "Earth”
+    09 May 2025
+
+- Android 15 with May security patch (QPR2)
+- Add Statusbar logo customizations
+- Add Statusbar clock background chip
+- Add Toggling privacy indicators
+- Add ability to toggle bluetooth battery level
+- Add Background process killer
+- Add Amogus icon
+- Add Ripple Unlock Animation
+- Add Notchbarkiller
+- Add Force enable LTE_CA
+- Add Volume stream steps 
+- Add Data Switch QS Tile
+- Add Tasks to recents
+- Add Search bar style
+- Add Integrate avatar inside A15-revamp search bar
+- Add Hide ADB and developer
+- Add Comss DNS provider
+- Add More DNS providers
+- Add Hdr display
+- Redesain Volume dialog changes
+- Redesign charging ripple
 
 ★Changelog 03 May 2025
+                
 - Fix clock seconds
 - Fix 4G Switch
 - Drop Pie Animation
@@ -453,7 +506,9 @@ More Speed</big></pre>
 - Add more DNS providers
 - Add hdr display
 
-★Changelog 24 April 2025 
+★HorizonDroid Alpha Android 15 presents: "supernova”
+    24 April 2025
+
 -Security Pacth April Qpr2
 -Integrate HorizonLab into Settings New implement
 -Integrate Omnijaws
@@ -487,6 +542,8 @@ More Speed</big></pre>
 Wanna Build?  <a href="https://github.com/HorizonV2" class="button-link">Here</a>
 
 Happy building have a nice day. </pre>
+             </div>
+            </div>
         </section>
 
         <!-- Links Section -->
@@ -511,6 +568,7 @@ Don't worry, Just report <a href="https://t.me/horizondroidchatroom" class="butt
     </main>
 
     <script>
+        
         // Theme Toggle
         function toggleTheme() {
             const body = document.body;
@@ -655,5 +713,6 @@ Don't worry, Just report <a href="https://t.me/horizondroidchatroom" class="butt
             });
         });
     </script>
+    
 </body>
 </html>
