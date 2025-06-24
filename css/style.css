@@ -931,3 +931,21 @@ body.menu-active .navbar {
         background: rgba(248, 249, 250, 0.98);
     }
 }
+
+/* --- Mobile View Adjustments --- */
+@media (max-width: 900px) {
+    /* Hide the large logo image on mobile */
+    .hero-image {
+        display: none;
+    }
+
+    /* OPTIONAL: Center the text for a cleaner look */
+    .hero {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .hero-text {
+        padding-right: 0;
+    }
+}
