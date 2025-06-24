@@ -203,13 +203,35 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         }
     }
-
-    // Close hamburger menu when clicking links
-    document.querySelectorAll('.nav-links a').forEach(link => {
-        link.addEventListener('click', () => {
-            if (window.innerWidth <= 900) {
-                document.getElementById('menu-toggle').checked = false;
-            }
-        });
-    });
 });
+
+// --- Floating Action Button (FAB) Menu Logic ---
+const fabToggle = document.getElementById('fab-menu-toggle');
+const fabIcon = document.getElementById('fab-icon');
+const body = document.body;
+const navLinksContainer = document.querySelector('.nav-links');
+
+if (fabToggle && fabIcon && body && navLinksContainer) {
+    // Toggles the menu when the FAB is clicked
+    fabToggle.addEventListener('click', () => {
+        body.classList.toggle('menu-active');
+        
+        // Toggles the icon between menu (bars) and close (times)
+        if (body.classList.contains('menu-active')) {
+            fabIcon.classList.remove('fa-bars');
+            fabIcon.classList.add('fa-times');
+        } else {
+            fabIcon.classList.remove('fa-times');
+            fabIcon.classList.add('fa-bars');
+        }
+    });
+
+    // Closes the menu when any of the navigation links are clicked
+    navLinksContainer.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A') {
+            body.classList.remove('menu-active');
+            fabIcon.classList.remove('fa-times');
+            fabIcon.classList.add('fa-bars');
+        }
+    });
+}
