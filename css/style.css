@@ -202,8 +202,7 @@ body.light-theme {
 }
 
 body.light-theme .navbar {
-    background: rgba(255, 255, 255, 0.9);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    background: rgb(0, 0, 0, 0.5);
 }
 
 .nav-container {
@@ -220,10 +219,6 @@ body.light-theme .navbar {
     font-weight: 700;
     color: var(--light);
     text-decoration: none;
-}
-
-body.light-theme .logo {
-    color: var(--primary);
 }
 
 .logo img {
@@ -244,10 +239,6 @@ body.light-theme .logo {
     transition: var(--transition);
     padding: 5px 12px;
     border-radius: 30px;
-}
-
-body.light-theme .nav-links a {
-    color: var(--light-text);
 }
 
 .nav-links a:hover,
@@ -928,7 +919,7 @@ body.menu-active .navbar {
 
     /* Light theme styles for the overlay */
     body.light-theme .nav-links {
-        background: rgba(248, 249, 250, 0.98);
+        background: rgba(0, 0, 0, 0.5);
     }
 }
 
