@@ -82,8 +82,8 @@ const Home = () => {
                 <section className="hero">
                     <div className="hero-text" data-aos="fade-right">
                         <h1>Horizon Droid</h1>
-                        <p className="subtitle">Welcome to a custom ROM experience, rebuilt on LineageOS with features you'll love.</p>
-                        <p>Clean, fast, and optimized for your daily life. Discover the Horizon difference.</p>
+                        <p className="subtitle">Experience the future of custom ROMs with unmatched performance and elegance.</p>
+                        <p>Built on LineageOS foundation with carefully crafted features that enhance your daily Android experience. Clean, powerful, and designed for enthusiasts who demand the best.</p>
                     </div>
                     <div className="hero-image" data-aos="fade-left">
                         <img src="/img/logo.png" alt="Horizon Droid Logo" className="logo-large" />
@@ -91,39 +91,35 @@ const Home = () => {
                 </section>
 
                 <section className="section">
-                    <h2 className="section-title" data-aos="fade-up">Why Horizon?</h2>
+                    <h2 className="section-title" data-aos="fade-up">Why Choose Horizon?</h2>
                     <div className="features">
                         <div className="feature-card" data-aos="fade-up" data-aos-delay="100">
-                            <div className="feature-icon"><i className="fas fa-check-circle"></i></div>
-                            <h3>Bloatware Free</h3>
-                            <p>A pure, uncluttered Android experience without unnecessary apps.</p>
+                            <div className="feature-icon"><i className="fas fa-shield-check"></i></div>
+                            <h3>Pure & Clean</h3>
+                            <p>Experience Android without the bloat. Every component is carefully selected to deliver a pristine, fast, and reliable system that respects your device's potential.</p>
                         </div>
                         <div className="feature-card" data-aos="fade-up" data-aos-delay="200">
-                            <div className="feature-icon"><i className="fas fa-bolt"></i></div>
-                            <h3>Lightning Fast</h3>
-                            <p>Optimized for speed, giving you less loading and more doing.</p>
+                            <div className="feature-icon"><i className="fas fa-rocket"></i></div>
+                            <h3>Performance First</h3>
+                            <p>Optimized kernel, refined memory management, and intelligent resource allocation ensure your device runs smoother and faster than ever before.</p>
                         </div>
                         <div className="feature-card" data-aos="fade-up" data-aos-delay="300">
-                            <div className="feature-icon"><i className="fas fa-magic"></i></div>
-                            <h3>Beautifully Fluid</h3>
-                            <p>Enjoy smooth transitions and delightful animations across the UI.</p>
+                            <div className="feature-icon"><i className="fas fa-palette"></i></div>
+                            <h3>Beautiful Design</h3>
+                            <p>Thoughtfully designed interface with smooth animations, consistent theming, and attention to detail that makes every interaction delightful.</p>
                         </div>
                         <div className="feature-card" data-aos="fade-up" data-aos-delay="400">
-                            <div className="feature-icon"><i className="fas fa-star"></i></div>
-                            <h3>Enhanced Features</h3>
-                            <p>Thoughtful customizations and features you won't find elsewhere.</p>
+                            <div className="feature-icon"><i className="fas fa-cogs"></i></div>
+                            <h3>Smart Features</h3>
+                            <p>Innovative customizations and productivity enhancements that you won't find anywhere else, all designed to make your device truly yours.</p>
                         </div>
                     </div>
                 </section>
-                
-                <section className="full-screen-section" id="labs-image-section" data-aos="zoom-in">
-                    <img src="/img/labs.png" alt="HorizonLabs UI" />
-                </section>
 
                 <section className="section">
-                    <h2 className="section-title" data-aos="fade-up">A Glimpse of the UI</h2>
-                     <p className="section-subtitle" data-aos="fade-up">
-                        Explore the clean and intuitive interface of Horizon Droid.
+                    <h2 className="section-title" data-aos="fade-up">Interface Showcase</h2>
+                    <p className="section-subtitle" data-aos="fade-up">
+                        Discover the elegant and intuitive interface that makes Horizon Droid a joy to use every day.
                     </p>
                     <div className="carousel-wrapper" data-aos="fade-up">
                         <div className="carousel-track-container">
@@ -137,31 +133,39 @@ const Home = () => {
                                 ))}
                             </div>
                         </div>
-                        <button className="carousel-nav carousel-nav-left" onClick={handlePrev} aria-label="Previous Screenshot"><i className="fas fa-chevron-left"></i></button>
-                        <button className="carousel-nav carousel-nav-right" onClick={handleNext} aria-label="Next Screenshot"><i className="fas fa-chevron-right"></i></button>
+                        <button className="carousel-nav carousel-nav-left" onClick={handlePrev} aria-label="Previous Screenshot">
+                            <i className="fas fa-chevron-left"></i>
+                        </button>
+                        <button className="carousel-nav carousel-nav-right" onClick={handleNext} aria-label="Next Screenshot">
+                            <i className="fas fa-chevron-right"></i>
+                        </button>
                     </div>
                 </section>
 
                 <section className="section">
-                    <h2 className="section-title" data-aos="fade-up">Changelogs</h2>
+                    <h2 className="section-title" data-aos="fade-up">Latest Updates</h2>
                     <div className="changelog-wrapper" data-aos="fade-up">
-                        <p>We post changelogs on our source and in our community groups with every update. You can also view the latest one right here.</p>
+                        <p>Stay up to date with the latest improvements, features, and bug fixes. We're constantly evolving to bring you the best custom ROM experience possible.</p>
                         <div className="changelog-box">
-                            <h3 id="changelog-toggle" onClick={() => setIsChangelogExpanded(!isChangelogExpanded)} className={isChangelogExpanded ? 'expanded' : ''}>
-                                Latest Changelog <span id="toggle-icon">▼</span>
+                            <h3 
+                                id="changelog-toggle" 
+                                onClick={() => setIsChangelogExpanded(!isChangelogExpanded)} 
+                                className={isChangelogExpanded ? 'expanded' : ''}
+                            >
+                                <span>📋 Latest Changelog</span>
+                                <span id="toggle-icon">▼</span>
                             </h3>
                             <div id="changelog-container" className={isChangelogExpanded ? 'expanded' : ''}>
                                 <div id="changelog-content" dangerouslySetInnerHTML={{ __html: changelogHtml }} />
-                                <p className="changelog-link">
-                                    Full changelog available on our{' '}
+                                <div className="changelog-link">
                                     <a 
                                         href="https://github.com/HorizonV2/horizon_changelogs/tree/lineage-22.2" 
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
-                                        GitHub repository
-                                    </a>.
-                                </p>
+                                        🔗 View full changelog history on GitHub
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
