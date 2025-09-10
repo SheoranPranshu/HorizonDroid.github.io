@@ -15,7 +15,7 @@ const Devices = () => {
   useEffect(() => {
     const fetchDevices = async () => {
       try {
-        const response = await fetch('https://raw.githubusercontent.com/SheoranPranshu/test01/main/dinfo.json');
+        const response = await fetch('https://raw.githubusercontent.com/HorizonV2/OTA/lineage-22.2/dinfo.json');
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
