@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import './Home.css';
+import '../components/css/Home.css';
 
 const screenshots = [
     { src: "/img/UI (1).png", alt: "UI Screenshot 1" },
