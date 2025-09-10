@@ -180,10 +180,7 @@ const Navbar = () => {
         />
       )}
 
-      {/* Main Content Container */}
-      <div className="main-content" role="main">
-        {/* Your page content will go here */}
-      </div>
+ 
     </>
   );
 };

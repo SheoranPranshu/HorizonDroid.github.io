@@ -312,7 +312,7 @@
   }
 
   .main-content {
-    padding-top: 80px;
+    padding-top: 0;
   }
 }
 
@@ -334,7 +334,7 @@ body.menu-active .main-content {
   }
     
   .main-content {
-    padding-top: 70px;
+    padding-top: 0;
   }
 }
 
@@ -361,7 +361,7 @@ body.menu-active .main-content {
   }
     
   .main-content {
-    padding-top: 60px;
+    padding-top: 0;
   }
 }
 

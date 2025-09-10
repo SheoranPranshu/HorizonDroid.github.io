@@ -1,9 +1,9 @@
 .hero {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    min-height: 80vh;
-    padding: 50px 0;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 0 0 40px 0;
     gap: 40px;
 }
 
