@@ -6,7 +6,7 @@
   --navbar-black: #000000;
   
   --navbar-gradient-purple: linear-gradient(135deg, #6E00C8 0%, #C40086 100%);
-  --navbar-gradient-sidebar: linear-gradient(180deg, #6E00C8, #C40086, #12104A);
+  --navbar-gradient-sidebar: linear-gradient(180deg, #000000, #111111, #222222);
   --navbar-gradient-glow: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
   
   --navbar-sidebar-width: 280px;
@@ -124,11 +124,12 @@
   display: block;
   position: sticky;
   top: 0;
-  background: var(--navbar-gradient-sidebar);
+  background: rgba(0, 0, 0, 0.95);
   backdrop-filter: blur(15px);
   padding: var(--navbar-mobile-padding);
   z-index: 999;
   box-shadow: 0 2px 15px rgba(110, 0, 200, 0.3);
+  border-bottom: 1px solid rgba(110, 0, 200, 0.2);
 }
 
 .mobile-header-content {
@@ -167,7 +168,7 @@
 }
 
 .hamburger:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(110, 0, 200, 0.2);
 }
 
 .hamburger span {
@@ -206,11 +207,12 @@
   display: flex;
   flex-direction: column;
   transform: translateX(-100%);
+  border-right: 1px solid rgba(110, 0, 200, 0.3);
 }
 
 .sidebar-header {
   padding: 30px 25px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(110, 0, 200, 0.2);
 }
 
 .sidebar-logo {
@@ -288,7 +290,7 @@
 
 .sidebar-footer {
   padding: 20px 25px;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(110, 0, 200, 0.2);
   text-align: center;
 }
 
