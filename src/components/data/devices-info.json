@@ -1,0 +1,13 @@
+{
+  "devices": [
+    {
+      "device_name": "Mi 9T",
+      "codename": "davinci", 
+      "maintainer": "superxorn",
+      "status": "active",
+      "company": "Xiaomi",
+      "support_group": "https://t.me/superxornplayground",
+      "image_url": "https://wiki.lineageos.org/images/devices/davinci.png"
+    }
+  ]
+}
