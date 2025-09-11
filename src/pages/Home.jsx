@@ -101,7 +101,7 @@ const Home = () => {
                         <div className="feature-card" data-aos="fade-up" data-aos-delay="200">
                             <div className="feature-icon"><i className="fas fa-rocket"></i></div>
                             <h3>Performance First</h3>
-                            <p>Optimized kernel, refined memory management, and intelligent resource allocation ensure your device runs smoother and faster than ever before.</p>
+                            <p>Refined memory management, Optimized Source, and intelligent resource allocation ensure your device runs smoother and faster than ever before.</p>
                         </div>
                         <div className="feature-card" data-aos="fade-up" data-aos-delay="300">
                             <div className="feature-icon"><i className="fas fa-palette"></i></div>
