@@ -1,0 +1,103 @@
+{
+  "devices": [
+    {
+      "device_name": "Mi 9T",
+      "codename": "davinci",
+      "maintainer": "superxorn",
+      "status": "active",
+      "company": "Xiaomi",
+      "support_group": "https://t.me/superxornplayground",
+      "image_url": "https://wiki.lineageos.org/images/devices/davinci.png"
+    },
+    {
+      "device_name": "Redmi 13C | POCO C65",
+      "codename": "gale",
+      "maintainer": "SuperVannXツ",
+      "status": "active",
+      "company": "Xiaomi",
+      "support_group": "https://t.me/epankngopi",
+      "image_url": "../../../public/img/gale.png"
+    },
+    {
+      "device_name": "Redmi Note 9 Pro",
+      "codename": "miatoll",
+      "maintainer": "AFIF",
+      "status": "active",
+      "company": "Xiaomi",
+      "support_group": "",
+      "image_url": "https://wiki.lineageos.org/images/devices/miatoll.png"
+    },
+    {
+      "device_name": "Poco X5 5G/Redmi Note 12 5G",
+      "codename": "stone",
+      "maintainer": "JARVIS",
+      "status": "active",
+      "company": "Xiaomi",
+      "support_group": "https://t.me/dsidesupport",
+      "image_url": "../../../public/img/stone.webp"
+    },
+    {
+      "device_name": "Redmi Note 10 Pro",
+      "codename": "sweet",
+      "maintainer": "Djampt_",
+      "status": "active",
+      "company": "Xiaomi",
+      "support_group": "https://t.me/Djampt",
+      "image_url": "https://wiki.lineageos.org/images/devices/sweet.png"
+    },
+    {
+      "device_name": "Redmi Note 8",
+      "codename": "ginkgo",
+      "maintainer": "Hirokixd",
+      "status": "active",
+      "company": "Xiaomi",
+      "support_group": "https://t.me/hkprojection",
+      "image_url": "https://wiki.lineageos.org/images/devices/ginkgo.png"
+    },
+    {
+      "device_name": "Xiaomi Mi 11x Pro/Redmi K40 Pro+",
+      "codename": "haydn",
+      "maintainer": "Akshay",
+      "status": "active",
+      "company": "Xiaomi",
+      "support_group": "https://t.me/pandemonium_haydn",
+      "image_url": "https://wiki.lineageos.org/images/devices/haydn.png"
+    },
+    {
+      "device_name": "Redmi Note 13 Pro 5G / Poco X6",
+      "codename": "garnet",
+      "maintainer": "Soni_Hikari",
+      "status": "active",
+      "company": "Xiaomi",
+      "support_group": "https://t.me/JR205",
+      "image_url": "../../../public/img/garnet.webp"
+    },
+    {
+      "device_name": "Poco X3 NFC",
+      "codename": "surya",
+      "maintainer": "Skyy丨アラタ",
+      "status": "active",
+      "company": "Xiaomi",
+      "support_group": "https://t.me/ArataXDummy",
+      "image_url": "https://wiki.lineageos.org/images/devices/surya.png"
+    },
+    {
+      "device_name": "OnePlus 6",
+      "codename": "enchilada",
+      "maintainer": "Akshay",
+      "status": "active",
+      "company": "OnePlus",
+      "support_group": "https://t.me/pandemonium_haydn",
+      "image_url": "https://wiki.lineageos.org/images/devices/enchilada.png"
+    },
+    {
+      "device_name": "Poco F5/Redmi Note 12 Turbo",
+      "codename": "marble",
+      "maintainer": "MaulsXSMGReborn",
+      "status": "active",
+      "company": "Xiaomi",
+      "support_group": "https://t.me/mauls_build",
+      "image_url": "https://wiki.lineageos.org/images/devices/marble.png"
+    }
+  ]
+}
