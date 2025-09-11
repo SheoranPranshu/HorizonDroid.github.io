@@ -1,11 +1,12 @@
 .footer {
     position: relative;
-    background: rgba(0, 0, 0, 0.9);
+    background: rgba(0, 0, 0, 0.95);
     backdrop-filter: blur(20px);
-    color: #8b5cf6;
+    color: #6E00C8;
     padding: 40px 0 30px;
     margin-top: 80px;
     text-align: center;
+    border-top: 1px solid rgba(110, 0, 200, 0.2);
 }
 
 .footer::before {
@@ -16,8 +17,8 @@
     right: 0;
     bottom: 0;
     background: 
-        radial-gradient(circle at 20% 50%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.05) 0%, transparent 50%);
+        radial-gradient(circle at 20% 50%, rgba(110, 0, 200, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(196, 0, 134, 0.1) 0%, transparent 50%);
     pointer-events: none;
 }
 
@@ -33,7 +34,7 @@
     font-size: 2.2rem;
     font-weight: 700;
     margin-bottom: 25px;
-    background: linear-gradient(45deg, #a855f7, #8b5cf6);
+    background: linear-gradient(45deg, #6E00C8, #C40086);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -50,36 +51,36 @@
 }
 
 .credit a {
-    color: #8b5cf6;
+    color: #6E00C8;
     text-decoration: none;
     font-weight: 600;
     padding: 8px 16px;
     border-radius: 25px;
-    background: rgba(139, 92, 246, 0.15);
+    background: rgba(110, 0, 200, 0.15);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(139, 92, 246, 0.3);
+    border: 1px solid rgba(110, 0, 200, 0.3);
     transition: all 0.3s ease;
-    text-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+    text-shadow: 0 0 10px rgba(110, 0, 200, 0.5);
 }
 
 .credit a:hover {
-    background: rgba(139, 92, 246, 0.25);
-    color: #a855f7;
+    background: rgba(110, 0, 200, 0.25);
+    color: #C40086;
     transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
-    text-shadow: 0 0 15px rgba(139, 92, 246, 0.8);
+    box-shadow: 0 0 15px rgba(110, 0, 200, 0.6), 0 8px 20px rgba(196, 0, 134, 0.4);
+    text-shadow: 0 0 15px rgba(110, 0, 200, 0.8);
 }
 
 @media (max-width: 768px) {
     .footer {
-        background: linear-gradient(135deg, #8B5CF6 0%, #A855F7 50%, #9333EA 100%);
+        background: linear-gradient(135deg, #6E00C8 0%, #C40086 50%, #12104A 100%);
         color: white;
     }
     
     .footer::before {
         background: 
-            radial-gradient(circle at 20% 50%, rgba(139, 92, 246, 0.2) 0%, transparent 50%),
-            radial-gradient(circle at 80% 20%, rgba(168, 85, 247, 0.1) 0%, transparent 50%);
+            radial-gradient(circle at 20% 50%, rgba(110, 0, 200, 0.2) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(196, 0, 134, 0.15) 0%, transparent 50%);
     }
     
     .great-day {
@@ -97,12 +98,14 @@
         color: white;
         background: rgba(255, 255, 255, 0.15);
         border: 1px solid rgba(255, 255, 255, 0.2);
+        text-shadow: none;
     }
     
     .credit a:hover {
         background: rgba(255, 255, 255, 0.25);
         color: white;
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        text-shadow: none;
     }
     
     .footer {

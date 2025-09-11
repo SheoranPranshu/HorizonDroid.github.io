@@ -5,12 +5,13 @@
 }
 
 .build-section {
-    background: #ffffff;
+    background: rgba(17, 17, 17, 0.95);
+    backdrop-filter: blur(10px);
     border-radius: 16px;
     padding: 32px;
     margin-bottom: 24px;
-    border: 1px solid rgba(99, 102, 241, 0.1);
-    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.08);
+    border: 1px solid rgba(110, 0, 200, 0.2);
+    box-shadow: 0 4px 20px rgba(110, 0, 200, 0.15);
     position: relative;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -23,18 +24,18 @@
     left: 0;
     right: 0;
     height: 4px;
-    background: var(--gradient-purple);
+    background: linear-gradient(135deg, #6E00C8 0%, #C40086 100%);
     border-radius: 16px 16px 0 0;
 }
 
 .build-section:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(99, 102, 241, 0.12);
-    border-color: rgba(99, 102, 241, 0.15);
+    box-shadow: 0 0 25px rgba(110, 0, 200, 0.4), 0 10px 30px rgba(196, 0, 134, 0.2);
+    border-color: rgba(110, 0, 200, 0.3);
 }
 
 .build-section:first-child {
-    background: var(--gradient-purple);
+    background: linear-gradient(135deg, #6E00C8 0%, #C40086 100%);
     color: white;
     text-align: center;
     padding: 32px;
@@ -61,14 +62,14 @@
 .build-section h2 {
     font-size: 1.6rem;
     margin-bottom: 20px;
-    color: var(--primary);
+    color: #6E00C8;
     display: flex;
     align-items: center;
     gap: 12px;
     font-weight: 700;
     letter-spacing: -0.01em;
     padding-bottom: 12px;
-    border-bottom: 2px solid var(--purple-light);
+    border-bottom: 2px solid rgba(110, 0, 200, 0.2);
     position: relative;
 }
 
@@ -79,17 +80,17 @@
     left: 0;
     width: 50px;
     height: 2px;
-    background: var(--gradient-purple);
+    background: linear-gradient(135deg, #6E00C8 0%, #C40086 100%);
     border-radius: 1px;
 }
 
 .build-section h2 i {
-    color: var(--primary);
+    color: white;
     font-size: 1.2rem;
     min-width: 20px;
     transition: transform 0.3s ease;
     padding: 8px;
-    background: var(--gradient-purple-light);
+    background: #12104A;
     border-radius: 10px;
     display: flex;
     align-items: center;
@@ -100,20 +101,21 @@
 
 .build-section:hover h2 i {
     transform: scale(1.05);
-    background: var(--gradient-purple);
+    background: linear-gradient(135deg, #6E00C8 0%, #C40086 100%);
     color: white;
+    box-shadow: 0 0 10px rgba(110, 0, 200, 0.5);
 }
 
 .build-section p {
     line-height: 1.6;
     margin-bottom: 16px;
-    color: var(--text-secondary);
+    color: #e0e0e0;
     font-size: 1rem;
     max-width: 100%;
 }
 
 .build-section a:not(.btn) {
-    color: var(--primary);
+    color: #6E00C8;
     text-decoration: none;
     font-weight: 600;
     position: relative;
@@ -123,8 +125,9 @@
 }
 
 .build-section a:not(.btn):hover {
-    background: var(--gradient-purple-light);
-    color: var(--secondary);
+    background: rgba(110, 0, 200, 0.15);
+    color: #C40086;
+    box-shadow: 0 0 8px rgba(110, 0, 200, 0.3);
 }
 
 .build-section ul {
@@ -136,11 +139,11 @@
 }
 
 .build-section li {
-    color: var(--text-secondary);
+    color: #e0e0e0;
     padding: 12px;
-    background: rgba(248, 250, 252, 0.8);
+    background: rgba(18, 16, 74, 0.3);
     border-radius: 10px;
-    border-left: 3px solid var(--primary);
+    border-left: 3px solid #6E00C8;
     position: relative;
     transition: transform 0.2s ease, background 0.2s ease;
     font-size: 0.95rem;
@@ -148,20 +151,20 @@
 }
 
 .build-section li:hover {
-    background: var(--gradient-purple-light);
-    color: var(--text-primary);
+    background: rgba(110, 0, 200, 0.15);
+    color: #ffffff;
     transform: translateX(4px);
-    border-left-color: var(--secondary);
-    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.1);
+    border-left-color: #C40086;
+    box-shadow: 0 2px 12px rgba(110, 0, 200, 0.2);
 }
 
 .build-section li b {
-    color: var(--primary);
+    color: #6E00C8;
     font-weight: 700;
 }
 
 .build-section li:hover b {
-    color: var(--secondary);
+    color: #C40086;
 }
 
 .requirements-box {
@@ -171,29 +174,29 @@
 
 .requirements-box > p:first-child {
     font-size: 1rem;
-    color: var(--text-primary);
+    color: #ffffff;
     margin-bottom: 20px;
     font-weight: 600;
     padding: 16px;
-    background: var(--gradient-purple-light);
+    background: rgba(110, 0, 200, 0.15);
     border-radius: 10px;
-    border-left: 3px solid var(--primary);
+    border-left: 3px solid #6E00C8;
 }
 
 .build-content hr {
     border: none;
     height: 1px;
-    background: var(--gradient-purple);
+    background: linear-gradient(135deg, #6E00C8 0%, #C40086 100%);
     margin: 32px 0;
     border-radius: 1px;
-    opacity: 0.3;
+    opacity: 0.5;
 }
 
 .build-section .btn {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    background: var(--gradient-purple);
+    background: linear-gradient(135deg, #6E00C8 0%, #C40086 100%);
     color: white;
     padding: 14px 28px;
     border-radius: 50px;
@@ -203,7 +206,7 @@
     transition: transform 0.2s ease, box-shadow 0.2s ease;
     border: none;
     cursor: pointer;
-    box-shadow: 0 4px 16px rgba(99, 102, 241, 0.25);
+    box-shadow: 0 4px 16px rgba(110, 0, 200, 0.4);
     margin-top: 20px;
     position: relative;
     overflow: hidden;
@@ -226,9 +229,9 @@
 
 .build-section .btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 24px rgba(99, 102, 241, 0.35);
+    box-shadow: 0 0 15px rgba(110, 0, 200, 0.6), 0 8px 24px rgba(196, 0, 134, 0.4);
     text-decoration: none;
-    background: var(--gradient-purple-hover);
+    background: linear-gradient(135deg, #5A0099 0%, #9A006B 100%);
 }
 
 .build-section .btn:hover::before {
@@ -372,6 +375,6 @@
 }
 
 .build-section .btn:focus-visible {
-    outline: 2px solid rgba(99, 102, 241, 0.5);
+    outline: 2px solid rgba(110, 0, 200, 0.5);
     outline-offset: 2px;
 }

@@ -1,16 +1,18 @@
 :root {
-  --primary: #6366f1;
-  --accent: #a855f7;
+  --primary: #6E00C8;
+  --accent: #C40086;
+  --accent-dark: #12104A;
   --success: #10b981;
   --warning: #f59e0b;
   --danger: #ef4444;
-  --bg-primary: #ffffff;
-  --card-bg: rgba(255, 255, 255, 0.7);
-  --border-color: rgba(15, 23, 42, 0.06);
-  --border-color-light: rgba(15, 23, 42, 0.04);
-  --text-primary: #0f172a;
-  --text-secondary: #6b7280;
-  --text-muted: #9ca3af;
+  --bg-primary: #000000;
+  --bg-secondary: #111111;
+  --card-bg: rgba(17, 17, 17, 0.95);
+  --border-color: rgba(110, 0, 200, 0.2);
+  --border-color-light: rgba(110, 0, 200, 0.1);
+  --text-primary: #ffffff;
+  --text-secondary: #e0e0e0;
+  --text-muted: #a0a0a0;
   --transition: all 0.22s cubic-bezier(.2, .9, .2, 1);
 }
 
@@ -52,7 +54,7 @@
   border: 2px solid var(--border-color);
   border-radius: 12px;
   font-size: 1rem;
-  background: var(--bg-primary);
+  background: var(--bg-secondary);
   color: var(--text-primary);
   transition: var(--transition);
   outline: none;
@@ -60,7 +62,7 @@
 
 .search-input:focus {
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.08);
+  box-shadow: 0 0 0 3px rgba(110, 0, 200, 0.2), 0 0 15px rgba(110, 0, 200, 0.3);
 }
 
 .search-input::placeholder {
@@ -78,7 +80,7 @@
   padding: 12px 16px;
   border: 2px solid var(--border-color);
   border-radius: 12px;
-  background: var(--bg-primary);
+  background: var(--bg-secondary);
   color: var(--text-primary);
   font-size: 0.9rem;
   cursor: pointer;
@@ -89,11 +91,12 @@
 
 .filter-select:hover {
   border-color: var(--primary);
+  box-shadow: 0 0 10px rgba(110, 0, 200, 0.3);
 }
 
 .filter-select:focus {
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.08);
+  box-shadow: 0 0 0 3px rgba(110, 0, 200, 0.2);
 }
 
 .devices-grid {
@@ -111,12 +114,12 @@
 
 .device-card {
   background: var(--card-bg);
+  backdrop-filter: blur(10px);
   border: 1px solid var(--border-color-light);
   border-radius: 18px;
   padding: 28px;
   cursor: pointer;
   transition: var(--transition);
-  backdrop-filter: blur(8px);
   position: relative;
   overflow: visible;
   opacity: 0;
@@ -136,7 +139,7 @@
   bottom: -18px;
   width: 70%;
   height: 28px;
-  background: radial-gradient(closest-side, rgba(99, 102, 241, 0.12), transparent 60%);
+  background: radial-gradient(closest-side, rgba(110, 0, 200, 0.3), transparent 60%);
   filter: blur(12px);
   z-index: 0;
   pointer-events: none;
@@ -151,7 +154,7 @@
 
 .device-card:hover {
   transform: translateY(-8px);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 0 25px rgba(110, 0, 200, 0.4), 0 30px 60px rgba(196, 0, 134, 0.2);
   border-color: var(--primary);
 }
 
@@ -161,7 +164,7 @@
   margin-bottom: 20px;
   border-radius: 14px;
   overflow: hidden;
-  background: linear-gradient(180deg, rgba(99, 102, 241, 0.04) 0%, rgba(168, 85, 247, 0.03) 100%);
+  background: linear-gradient(180deg, rgba(110, 0, 200, 0.1) 0%, rgba(196, 0, 134, 0.05) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -177,7 +180,7 @@
   right: 0;
   bottom: 0;
   height: 45%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(99, 102, 241, 0.06) 60%, rgba(99, 102, 241, 0.12) 100%);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(110, 0, 200, 0.1) 60%, rgba(110, 0, 200, 0.2) 100%);
   pointer-events: none;
   mix-blend-mode: overlay;
 }
@@ -189,7 +192,7 @@
   top: -10%;
   width: 140%;
   height: 40%;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.0));
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.0));
   transform: rotate(-10deg);
   pointer-events: none;
 }
@@ -206,6 +209,7 @@
 .device-placeholder {
   font-size: 2.5rem;
   opacity: 0.6;
+  color: var(--text-muted);
 }
 
 .device-info {
@@ -237,7 +241,8 @@
   color: transparent;
   padding: 6px 10px;
   border-radius: 8px;
-  border: 1px solid rgba(99, 102, 241, 0.06);
+  border: 1px solid rgba(110, 0, 200, 0.2);
+  background-color: rgba(18, 16, 74, 0.3);
 }
 
 .device-maintainer {
@@ -264,21 +269,21 @@
 }
 
 .status-active {
-  background: rgba(16, 185, 129, 0.1);
+  background: rgba(16, 185, 129, 0.2);
   color: var(--success);
-  border: 1px solid rgba(16, 185, 129, 0.2);
+  border: 1px solid rgba(16, 185, 129, 0.3);
 }
 
 .status-inactive {
-  background: rgba(245, 158, 11, 0.1);
+  background: rgba(245, 158, 11, 0.2);
   color: var(--warning);
-  border: 1px solid rgba(245, 158, 11, 0.2);
+  border: 1px solid rgba(245, 158, 11, 0.3);
 }
 
 .status-discontinued {
-  background: rgba(239, 68, 68, 0.1);
+  background: rgba(239, 68, 68, 0.2);
   color: var(--danger);
-  border: 1px solid rgba(239, 68, 68, 0.2);
+  border: 1px solid rgba(239, 68, 68, 0.3);
 }
 
 .devices-loading,
@@ -323,8 +328,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -341,13 +346,15 @@
 }
 
 .device-modal {
-  background: var(--bg-primary);
+  background: var(--card-bg);
+  backdrop-filter: blur(15px);
+  border: 1px solid var(--border-color);
   border-radius: 20px;
   max-width: 800px;
   width: 100%;
   max-height: 90vh;
   overflow: hidden;
-  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 30px rgba(110, 0, 200, 0.4), 0 25px 50px rgba(0, 0, 0, 0.6);
   transform: scale(0.9);
   animation: modalSlideIn 0.3s ease forwards;
   display: flex;
@@ -391,7 +398,7 @@
 }
 
 .modal-close:hover {
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(110, 0, 200, 0.2);
   color: var(--text-primary);
 }
 
@@ -412,7 +419,7 @@
 }
 
 .variant-card {
-  background: #f8f9fa;
+  background: rgba(18, 16, 74, 0.3);
   border: 1px solid var(--border-color-light);
   border-radius: 16px;
   padding: 24px;
@@ -421,7 +428,7 @@
 
 .variant-card:hover {
   border-color: var(--primary);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+  box-shadow: 0 0 15px rgba(110, 0, 200, 0.3), 0 10px 20px rgba(196, 0, 134, 0.1);
 }
 
 .variant-header {
@@ -439,7 +446,7 @@
 }
 
 .build-type {
-  background: var(--primary);
+  background: var(--accent-dark);
   color: white;
   padding: 6px 12px;
   border-radius: 20px;
@@ -461,7 +468,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 12px;
-  background: var(--bg-primary);
+  background: rgba(0, 0, 0, 0.3);
   border-radius: 8px;
   border: 1px solid var(--border-color-light);
   gap: 16px;
@@ -483,7 +490,8 @@
 .detail-row .value.code {
   font-family: 'Courier New', monospace;
   font-size: 0.85rem;
-  background: #e9ecef;
+  background: rgba(110, 0, 200, 0.2);
+  color: var(--accent);
   padding: 4px 8px;
   border-radius: 4px;
 }
@@ -495,21 +503,21 @@
 }
 
 .btn-secondary {
-    background: #e9ecef;
+    background: rgba(18, 16, 74, 0.5);
     color: var(--text-primary) !important;
     border: 2px solid var(--border-color);
     box-shadow: none;
 }
 
 .btn-secondary:hover {
-    background: #ced4da;
+    background: rgba(110, 0, 200, 0.3);
     border-color: var(--primary);
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.2);
+    box-shadow: 0 0 15px rgba(110, 0, 200, 0.4), 0 8px 25px rgba(196, 0, 134, 0.2);
 }
 
 .support-section {
-    background: #f8f9fa;
+    background: rgba(18, 16, 74, 0.3);
     border: 1px solid var(--border-color-light);
     border-radius: 16px;
     padding: 24px;
@@ -574,6 +582,32 @@
     font-size: 1rem;
     margin-bottom: 26px;
   }
+
+  .device-modal {
+    margin: 10px;
+    max-width: calc(100% - 20px);
+  }
+
+  .modal-header {
+    padding: 20px;
+  }
+
+  .modal-content {
+    padding: 20px;
+  }
+
+  .variant-card {
+    padding: 20px;
+  }
+
+  .variant-actions {
+    flex-direction: column;
+  }
+
+  .variant-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 @media (max-width: 480px) {
@@ -583,5 +617,17 @@
 
   .device-name {
     font-size: 1.25rem;
+  }
+
+  .modal-header {
+    padding: 16px;
+  }
+
+  .modal-content {
+    padding: 16px;
+  }
+
+  .variant-card {
+    padding: 16px;
   }
 }
