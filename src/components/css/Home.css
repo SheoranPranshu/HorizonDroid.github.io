@@ -120,16 +120,56 @@
     text-align: center;
     font-size: 1.3rem;
     max-width: 700px;
-    margin: -20px auto 30px;
+    margin: -20px auto 40px;
     color: #e0e0e0;
     font-weight: 400;
+}
+
+.showcase-section {
+    margin: 80px 0;
+}
+
+.showcase-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.showcase-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+.showcase-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #6E00C8 0%, #C40086 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: white;
+    box-shadow: 0 8px 25px rgba(110, 0, 200, 0.3);
+}
+
+.showcase-subtitle {
+    font-size: 1.1rem;
+    color: #a0a0a0;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
 }
 
 .carousel-wrapper {
     position: relative;
     max-width: 100%;
-    margin: 0 auto 40px;
-    padding: 0;
+    margin: 0 auto;
 }
 
 .carousel-container {
@@ -139,7 +179,7 @@
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    padding: 20px 0;
+    padding: 30px 0;
 }
 
 .carousel-container::-webkit-scrollbar {
@@ -148,37 +188,36 @@
 
 .carousel-track {
     display: flex;
-    gap: 15px;
-    padding: 0 20px;
+    gap: 20px;
+    padding: 0 40px;
     width: max-content;
 }
 
 .screenshot-card {
     flex: 0 0 auto;
-    width: 200px;
-    height: 400px;
-    background: rgba(17, 17, 17, 0.95);
-    border-radius: 12px;
-    border: 1px solid rgba(110, 0, 200, 0.3);
-    padding: 8px;
+    width: 220px;
+    height: 440px;
+    background: rgba(17, 17, 17, 0.8);
+    border-radius: 16px;
+    border: 1px solid rgba(110, 0, 200, 0.2);
+    padding: 3px;
     position: relative;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
     cursor: pointer;
 }
 
 .screenshot-card:hover {
-    transform: translateY(-2px);
+    transform: translateY(-8px);
     border-color: #6E00C8;
-    box-shadow: 0 8px 25px rgba(110, 0, 200, 0.3);
+    box-shadow: 0 15px 40px rgba(110, 0, 200, 0.4);
 }
 
 .screenshot-content {
     width: 100%;
     height: 100%;
-    border-radius: 8px;
+    border-radius: 13px;
     overflow: hidden;
     background: #000;
-    position: relative;
 }
 
 .screenshot-content img {
@@ -189,42 +228,30 @@
     display: block;
 }
 
-.screenshot-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(
-        180deg,
-        transparent 0%,
-        transparent 70%,
-        rgba(0, 0, 0, 0.3) 90%,
-        rgba(0, 0, 0, 0.6) 100%
-    );
-    opacity: 0;
-    transition: opacity 0.2s ease;
-    pointer-events: none;
-}
-
-.screenshot-card:hover .screenshot-overlay {
-    opacity: 1;
-}
-
-.scroll-hint {
+.scroll-indicator {
     text-align: center;
-    margin-top: 15px;
+    margin-top: 25px;
+    padding: 12px 24px;
+    background: rgba(110, 0, 200, 0.1);
+    border: 1px solid rgba(110, 0, 200, 0.2);
+    border-radius: 25px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
     color: #a0a0a0;
     font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+    transition: all 0.3s ease;
 }
 
-.scroll-hint i {
+.scroll-indicator:hover {
+    background: rgba(110, 0, 200, 0.15);
+    border-color: #6E00C8;
+    color: #e0e0e0;
+}
+
+.scroll-indicator i {
     color: #6E00C8;
-    font-size: 1.1rem;
+    font-size: 1rem;
 }
 
 .changelog-wrapper {
@@ -425,6 +452,24 @@
     .hero-image {
         display: none;
     }
+    .showcase-title {
+        font-size: 2rem;
+        flex-direction: column;
+        gap: 10px;
+    }
+    .showcase-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.5rem;
+    }
+    .carousel-track {
+        padding: 0 20px;
+        gap: 15px;
+    }
+    .screenshot-card {
+        width: 200px;
+        height: 400px;
+    }
     .changelog-wrapper {
         padding: 25px;
         margin: 0 10px;
@@ -453,6 +498,14 @@
         width: 180px;
         height: 360px;
     }
+    .showcase-title {
+        font-size: 1.8rem;
+    }
+    .showcase-icon {
+        width: 40px;
+        height: 40px;
+        font-size: 1.3rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -464,19 +517,9 @@
         width: 160px;
         height: 320px;
     }
-    .scroll-hint {
+    .scroll-indicator {
         font-size: 0.8rem;
-    }
-}
-
-@media (min-width: 1200px) {
-    .screenshot-card {
-        width: 220px;
-        height: 440px;
-    }
-    .carousel-track {
-        gap: 20px;
-        padding: 0 30px;
+        padding: 10px 20px;
     }
 }
 
