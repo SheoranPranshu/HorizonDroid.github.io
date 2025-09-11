@@ -16,7 +16,7 @@
       "status": "active",
       "company": "Xiaomi",
       "support_group": "https://t.me/epankngopi",
-      "image_url": "https://wiki.lineageos.org/images/devices/gale.png"
+      "image_url": "../../../public/img/gale.png"
     },
     {
       "device_name": "Redmi Note 9 Pro",
@@ -34,7 +34,7 @@
       "status": "active",
       "company": "Xiaomi",
       "support_group": "https://t.me/dsidesupport",
-      "image_url": "https://wiki.lineageos.org/images/devices/stone.png"
+      "image_url": "../../../public/img/stone.webp"
     },
     {
       "device_name": "Redmi Note 10 Pro",
@@ -70,7 +70,7 @@
       "status": "active",
       "company": "Xiaomi",
       "support_group": "https://t.me/JR205",
-      "image_url": "https://wiki.lineageos.org/images/devices/garnet.png"
+      "image_url": "../../../public/img/garnet.webp"
     },
     {
       "device_name": "Poco X3 NFC",
