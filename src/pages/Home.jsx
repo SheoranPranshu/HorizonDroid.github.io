@@ -24,7 +24,8 @@ const Home = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [changelogHtml, setChangelogHtml] = useState('<p>Loading changelog...</p>');
     const [isChangelogExpanded, setIsChangelogExpanded] = useState(false);
-    const carouselTrackRef = useRef(null);
+    const [isTransitioning, setIsTransitioning] = useState(false);
+    const carouselRef = useRef(null);
 
     useEffect(() => {
         AOS.init({
@@ -36,18 +37,13 @@ const Home = () => {
 
     useEffect(() => {
         const autoPlay = setInterval(() => {
-            setCurrentIndex(prevIndex => (prevIndex === screenshots.length - 1 ? 0 : prevIndex + 1));
+            handleNext();
         }, 5000);
         return () => clearInterval(autoPlay);
-    }, []);
+    }, [currentIndex]);
 
     useEffect(() => {
-        if (carouselTrackRef.current) {
-            const itemWidth = carouselTrackRef.current.children[0].offsetWidth;
-            const gap = 32;
-            const scrollAmount = (itemWidth + gap) * currentIndex;
-            carouselTrackRef.current.style.transform = `translateX(-${scrollAmount}px)`;
-        }
+        updateCarouselPositions();
     }, [currentIndex]);
 
     useEffect(() => {
@@ -68,12 +64,75 @@ const Home = () => {
         fetchChangelog();
     }, []);
 
+    const updateCarouselPositions = () => {
+        if (!carouselRef.current) return;
+        
+        const carousel = carouselRef.current;
+        const slides = carousel.querySelectorAll('.carousel-slide');
+        
+        carousel.classList.add('smooth');
+        
+        slides.forEach((slide, index) => {
+            const offset = index - currentIndex;
+            const absOffset = Math.abs(offset);
+            
+            let transform = '';
+            let opacity = 1;
+            let filter = 'none';
+            let zIndex = screenshots.length - absOffset;
+            
+            if (offset === 0) {
+                transform = 'translateX(0) translateZ(0) rotateY(0deg)';
+                opacity = 1;
+                filter = 'none';
+                zIndex = screenshots.length;
+            } else if (offset > 0) {
+                const translateX = Math.min(offset * 60, 200);
+                const rotateY = Math.min(offset * 15, 45);
+                transform = `translateX(${translateX}px) translateZ(-${absOffset * 100}px) rotateY(-${rotateY}deg)`;
+                opacity = Math.max(0.3, 1 - absOffset * 0.3);
+                filter = `blur(${Math.min(absOffset * 2, 6)}px)`;
+            } else {
+                const translateX = Math.max(offset * 60, -200);
+                const rotateY = Math.max(offset * 15, -45);
+                transform = `translateX(${translateX}px) translateZ(-${absOffset * 100}px) rotateY(-${rotateY}deg)`;
+                opacity = Math.max(0.3, 1 - absOffset * 0.3);
+                filter = `blur(${Math.min(absOffset * 2, 6)}px)`;
+            }
+            
+            if (absOffset > 3) {
+                opacity = 0;
+                slide.style.visibility = 'hidden';
+            } else {
+                slide.style.visibility = 'visible';
+            }
+            
+            slide.style.transform = transform;
+            slide.style.opacity = opacity;
+            slide.style.filter = filter;
+            slide.style.zIndex = zIndex;
+        });
+    };
+
     const handlePrev = () => {
+        if (isTransitioning) return;
+        setIsTransitioning(true);
         setCurrentIndex(prevIndex => (prevIndex === 0 ? screenshots.length - 1 : prevIndex - 1));
+        setTimeout(() => setIsTransitioning(false), 600);
     };
 
     const handleNext = () => {
+        if (isTransitioning) return;
+        setIsTransitioning(true);
         setCurrentIndex(prevIndex => (prevIndex === screenshots.length - 1 ? 0 : prevIndex + 1));
+        setTimeout(() => setIsTransitioning(false), 600);
+    };
+
+    const goToSlide = (index) => {
+        if (isTransitioning || index === currentIndex) return;
+        setIsTransitioning(true);
+        setCurrentIndex(index);
+        setTimeout(() => setIsTransitioning(false), 600);
     };
 
     return (
@@ -116,29 +175,63 @@ const Home = () => {
                     </div>
                 </section>
 
-                <section className="section">
-                    <h2 className="section-title" data-aos="fade-up">Interface Showcase</h2>
-                    <p className="section-subtitle" data-aos="fade-up">
-                        Discover the elegant and intuitive interface that makes Horizon Droid a joy to use every day.
-                    </p>
-                    <div className="carousel-wrapper" data-aos="fade-up">
-                        <div className="carousel-track-container">
-                            <div className="carousel-track" ref={carouselTrackRef}>
-                                {screenshots.map((screenshot, index) => (
-                                    <div className="phone-mockup" key={index}>
-                                        <div className="phone-screen">
-                                            <img src={screenshot.src} alt={screenshot.alt} loading="lazy" />
-                                        </div>
-                                    </div>
-                                ))}
+                <section className="section" id="screenshots">
+                    <div className="showcase-header" data-aos="fade-up">
+                        <div className="showcase-title">
+                            <div className="showcase-icon">
+                                <i className="fas fa-mobile-alt"></i>
                             </div>
+                            Interface Showcase
                         </div>
-                        <button className="carousel-nav carousel-nav-left" onClick={handlePrev} aria-label="Previous Screenshot">
-                            <i className="fas fa-chevron-left"></i>
-                        </button>
-                        <button className="carousel-nav carousel-nav-right" onClick={handleNext} aria-label="Next Screenshot">
-                            <i className="fas fa-chevron-right"></i>
-                        </button>
+                        <p className="showcase-subtitle">
+                            Discover the elegant and intuitive interface that makes Horizon Droid a joy to use every day.
+                        </p>
+                    </div>
+                    
+                    <div className="carousel" ref={carouselRef} data-aos="fade-up">
+                        {screenshots.map((screenshot, index) => (
+                            <div 
+                                key={index} 
+                                className="carousel-slide"
+                                onClick={() => goToSlide(index)}
+                                style={{ cursor: index !== currentIndex ? 'pointer' : 'default' }}
+                            >
+                                <img 
+                                    src={screenshot.src} 
+                                    alt={screenshot.alt} 
+                                    loading="lazy"
+                                />
+                            </div>
+                        ))}
+                        
+                        <div className="nav">
+                            <button 
+                                onClick={handlePrev} 
+                                disabled={isTransitioning}
+                                aria-label="Previous Screenshot"
+                            >
+                                <i className="fas fa-chevron-left"></i>
+                            </button>
+                            <button 
+                                onClick={handleNext} 
+                                disabled={isTransitioning}
+                                aria-label="Next Screenshot"
+                            >
+                                <i className="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                        
+                        <div className="pagination">
+                            {screenshots.map((_, index) => (
+                                <button
+                                    key={index}
+                                    className={`dot ${index === currentIndex ? 'active' : ''}`}
+                                    onClick={() => goToSlide(index)}
+                                    disabled={isTransitioning}
+                                    aria-label={`Go to screenshot ${index + 1}`}
+                                />
+                            ))}
+                        </div>
                     </div>
                 </section>
 
