@@ -1,5 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import '../components/css/Devices.css';
+
+const DeviceCard = React.memo(({ device, onClick, style }) => (
+  <div
+    className="device-card"
+    onClick={() => onClick(device)}
+    style={style}
+  >
+    <div className="device-image">
+      {device.image_url ? (
+        <img src={device.image_url} alt={device.device_name || device.codename} loading="lazy" />
+      ) : (
+        <div className="device-placeholder">
+          <span>📱</span>
+        </div>
+      )}
+    </div>
+
+    <div className="device-info">
+      <h3 className="device-name">{device.device_name}</h3>
+      <p className="device-codename"><span className="codename-text">{device.codename}</span></p>
+      <p className="device-maintainer">
+        Maintainer: <span className="maintainer-name">{device.maintainer || 'Unknown'}</span>
+      </p>
+
+      {device.status && (
+        <span className={`device-status status-${device.status}`}>
+          {device.status}
+        </span>
+      )}
+    </div>
+  </div>
+));
 
 const Devices = () => {
   const [devices, setDevices] = useState([]);
@@ -39,19 +71,22 @@ const Devices = () => {
     try {
       const variants = [];
 
-      const gappsResponse = await fetch(`https://raw.githubusercontent.com/HorizonV2/OTA/lineage-22.2/GAPPS/${codename}.json`);
+      const [gappsResponse, vanillaResponse] = await Promise.all([
+        fetch(`https://raw.githubusercontent.com/HorizonV2/OTA/lineage-22.2/GAPPS/${codename}.json`),
+        fetch(`https://raw.githubusercontent.com/HorizonV2/OTA/lineage-22.2/VANILLA/${codename}.json`)
+      ]);
+
       if (gappsResponse.ok) {
         const gappsData = await gappsResponse.json();
         if (gappsData?.response?.[0]) {
-            variants.push({ variant: 'GAPPS', ...gappsData.response[0] });
+          variants.push({ variant: 'GAPPS', ...gappsData.response[0] });
         }
       }
 
-      const vanillaResponse = await fetch(`https://raw.githubusercontent.com/HorizonV2/OTA/lineage-22.2/VANILLA/${codename}.json`);
       if (vanillaResponse.ok) {
         const vanillaData = await vanillaResponse.json();
         if (vanillaData?.response?.[0]) {
-            variants.push({ variant: 'VANILLA', ...vanillaData.response[0] });
+          variants.push({ variant: 'VANILLA', ...vanillaData.response[0] });
         }
       }
 
@@ -63,26 +98,28 @@ const Devices = () => {
     }
   };
 
-  const handleDeviceClick = (device) => {
+  const handleDeviceClick = useCallback((device) => {
     setSelectedDevice(device);
     fetchDeviceDetails(device.codename);
-  };
+  }, []);
+
 
   const closeDeviceDetails = () => {
     setSelectedDevice(null);
     setDeviceDetails(null);
   };
 
-  const companies = [...new Set(devices.map(device => device.company).filter(Boolean))];
+  const companies = useMemo(() => [...new Set(devices.map(device => device.company).filter(Boolean))], [devices]);
 
-  const filteredDevices = devices.filter(device => {
-    const matchesCompany = filterCompany === 'all' || device.company === filterCompany;
-    const matchesStatus = filterStatus === 'all' || device.status === filterStatus;
-    const matchesSearch =
-      (device.device_name && device.device_name.toLowerCase().includes(searchTerm.toLowerCase())) ||
-      (device.codename && device.codename.toLowerCase().includes(searchTerm.toLowerCase()));
-    return matchesCompany && matchesStatus && matchesSearch;
-  });
+  const filteredDevices = useMemo(() =>
+    devices.filter(device => {
+        const lowerSearchTerm = searchTerm.toLowerCase();
+        return (filterCompany === 'all' || device.company === filterCompany) &&
+               (filterStatus === 'all' || device.status === filterStatus) &&
+               ((device.device_name && device.device_name.toLowerCase().includes(lowerSearchTerm)) ||
+                (device.codename && device.codename.toLowerCase().includes(lowerSearchTerm)));
+    }), [devices, filterCompany, filterStatus, searchTerm]);
+
 
   const formatFileSize = (bytes) => {
     if (!bytes || bytes === 0) return '0 Bytes';
@@ -173,36 +210,12 @@ const Devices = () => {
 
         <div className="devices-grid">
           {filteredDevices.map((device, index) => (
-            <div
+            <DeviceCard 
               key={device.codename || index}
-              className="device-card"
-              onClick={() => handleDeviceClick(device)}
+              device={device}
+              onClick={handleDeviceClick}
               style={{ animationDelay: `${index * 0.06}s` }}
-            >
-              <div className="device-image">
-                {device.image_url ? (
-                  <img src={device.image_url} alt={device.device_name || device.codename} />
-                ) : (
-                  <div className="device-placeholder">
-                    <span>📱</span>
-                  </div>
-                )}
-              </div>
-
-              <div className="device-info">
-                <h3 className="device-name">{device.device_name}</h3>
-                <p className="device-codename"><span className="codename-text">{device.codename}</span></p>
-                <p className="device-maintainer">
-                  Maintainer: <span className="maintainer-name">{device.maintainer || 'Unknown'}</span>
-                </p>
-
-                {device.status && (
-                  <span className={`device-status status-${device.status}`}>
-                    {device.status}
-                  </span>
-                )}
-              </div>
-            </div>
+            />
           ))}
         </div>
 

@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 import Layout from './components/js/Layout';
-import Home from './pages/Home';
-import Devices from './pages/Devices';
-import Build from './pages/Build';
+
+const Home = lazy(() => import('./pages/Home'));
+const Devices = lazy(() => import('./pages/Devices'));
+const Build = lazy(() => import('./pages/Build'));
 
 function AppRoutes() {
   const location = useLocation();
@@ -29,13 +30,15 @@ function AppRoutes() {
   }, [location, navigate]);
 
   return (
-    <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />
-        <Route path="devices" element={<Devices />} />
-        <Route path="build" element={<Build />} />
-      </Route>
-    </Routes>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="devices" element={<Devices />} />
+          <Route path="build" element={<Build />} />
+        </Route>
+      </Routes>
+    </Suspense>
   );
 }
 

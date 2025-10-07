@@ -121,6 +121,7 @@
   flex-direction: column;
   align-items: center;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  will-change: transform, box-shadow;
 }
 
 .device-card::after {
@@ -404,6 +405,7 @@
   justify-content: center;
   border-radius: 8px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: background, color, transform;
 }
 
 .modal-close:hover {
@@ -437,6 +439,7 @@
   padding: 28px;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   backdrop-filter: blur(10px);
+  will-change: border-color, box-shadow, transform;
 }
 
 .variant-card:hover {
@@ -540,6 +543,7 @@
   align-items: center;
   justify-content: center;
   backdrop-filter: blur(10px);
+  will-change: background, border-color, transform, box-shadow;
 }
 
 .btn-secondary:hover {

@@ -4,30 +4,30 @@
   --navbar-accent: #12104A;
   --navbar-white: #ffffff;
   --navbar-black: #000000;
-  
+
   --navbar-gradient-purple: linear-gradient(135deg, #6E00C8 0%, #C40086 100%);
   --navbar-gradient-sidebar: linear-gradient(180deg, #000000, #111111, #222222);
   --navbar-gradient-glow: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-  
+
   --navbar-sidebar-width: 280px;
   --navbar-desktop-gap: 40px;
   --navbar-mobile-padding: 15px 20px;
-  
+
   --navbar-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   --navbar-transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   --navbar-bounce: all 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-  
+
   --navbar-backdrop-blur: blur(20px);
   --navbar-box-shadow: 0 8px 32px rgba(110, 0, 200, 0.4);
   --navbar-box-shadow-hover: 0 12px 40px rgba(196, 0, 134, 0.5);
 }
 
 @keyframes navbar-float {
-  0%, 100% { 
-    transform: translateY(0px); 
+  0%, 100% {
+    transform: translateY(0px);
   }
-  50% { 
-    transform: translateY(-6px); 
+  50% {
+    transform: translateY(-6px);
   }
 }
 
@@ -45,6 +45,7 @@
   box-shadow: var(--navbar-box-shadow);
   border: 1px solid rgba(110, 0, 200, 0.3);
   transition: var(--navbar-transition);
+  will-change: transform, box-shadow;
 }
 
 .desktop-navbar:hover {
@@ -79,6 +80,7 @@
 .desktop-logo img {
   height: 32px;
   animation: navbar-float 3s ease-in-out infinite;
+  will-change: transform;
 }
 
 .desktop-nav {
@@ -99,6 +101,7 @@
   border-radius: 15px;
   transition: var(--navbar-transition);
   position: relative;
+  will-change: color, background, transform;
 }
 
 .desktop-nav a:hover,
@@ -156,6 +159,7 @@
 .mobile-logo img {
   height: 32px;
   animation: navbar-float 3s ease-in-out infinite;
+  will-change: transform;
 }
 
 .hamburger {
@@ -179,6 +183,7 @@
   margin: 5px 0;
   transition: var(--navbar-transition);
   border-radius: 3px;
+  will-change: transform, opacity;
 }
 
 .hamburger.active span:nth-child(1) {
@@ -208,6 +213,11 @@
   flex-direction: column;
   transform: translateX(-100%);
   border-right: 1px solid rgba(110, 0, 200, 0.3);
+  will-change: transform;
+}
+
+.sidebar.active {
+    transform: translateX(0);
 }
 
 .sidebar-header {
@@ -235,6 +245,7 @@
 .sidebar-logo img {
   height: 40px;
   animation: navbar-float 3s ease-in-out infinite;
+  will-change: transform;
 }
 
 .sidebar-nav {
@@ -255,6 +266,7 @@
   position: relative;
   margin: 5px 15px;
   border-radius: 12px;
+  will-change: background, color, transform;
 }
 
 .sidebar-nav a::before {
@@ -267,6 +279,7 @@
   background: transparent;
   transition: var(--navbar-transition);
   border-radius: 0 4px 4px 0;
+  will-change: background;
 }
 
 .sidebar-nav a:hover,
@@ -312,17 +325,13 @@
     display: flex;
   }
 
-  .mobile-header {
+  .mobile-header, .sidebar, .sidebar-overlay {
     display: none;
   }
 
   .main-content {
     padding-top: 0;
   }
-}
-
-body.menu-active .sidebar {
-  transform: translateX(0);
 }
 
 body.menu-active .main-content {
@@ -337,7 +346,7 @@ body.menu-active .main-content {
   .mobile-header {
     display: block;
   }
-    
+
   .main-content {
     padding-top: 0;
   }
@@ -347,24 +356,24 @@ body.menu-active .main-content {
   .mobile-logo {
     font-size: 1.4rem;
   }
-  
+
   .mobile-logo img {
     height: 28px;
   }
-  
+
   .sidebar-logo {
     font-size: 1.6rem;
   }
-  
+
   .sidebar-logo img {
     height: 36px;
   }
-  
+
   .sidebar-nav a {
     font-size: 1rem;
     padding: 16px 20px;
   }
-    
+
   .main-content {
     padding-top: 0;
   }
@@ -392,7 +401,7 @@ body.menu-active .main-content {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  
+
   .desktop-logo img,
   .mobile-logo img,
   .sidebar-logo img {
@@ -416,9 +425,24 @@ body.menu-active .main-content {
   .sidebar {
     display: none;
   }
-  
+
   .main-content {
     margin-left: 0;
     padding-top: 0;
   }
+}
+
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
+    display: none;
+}
+
+.sidebar.active + .sidebar-overlay {
+    display: block;
 }
