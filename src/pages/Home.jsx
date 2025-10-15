@@ -1,31 +1,30 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import '../components/css/Home.css';
-
-const screenshots = [
-    { src: "/img/UI (1).png", alt: "UI Screenshot 1" },
-    { src: "/img/UI (2).png", alt: "UI Screenshot 2" },
-    { src: "/img/UI (3).png", alt: "UI Screenshot 3" },
-    { src: "/img/UI (4).png", alt: "UI Screenshot 4" },
-    { src: "/img/UI (5).png", alt: "UI Screenshot 5" },
-    { src: "/img/UI (6).png", alt: "UI Screenshot 6" },
-    { src: "/img/UI (7).png", alt: "UI Screenshot 7" },
-    { src: "/img/UI (8).png", alt: "UI Screenshot 8" },
-    { src: "/img/UI (9).png", alt: "UI Screenshot 9" },
-    { src: "/img/UI (10).png", alt: "UI Screenshot 10" },
-    { src: "/img/UI (11).png", alt: "UI Screenshot 11" },
-    { src: "/img/UI (12).png", alt: "UI Screenshot 12" },
-    { src: "/img/UI (13).png", alt: "UI Screenshot 13" },
-    { src: "/img/UI (14).png", alt: "UI Screenshot 14" },
-];
 
 const Home = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [changelogHtml, setChangelogHtml] = useState('<p>Loading changelog...</p>');
     const [isChangelogExpanded, setIsChangelogExpanded] = useState(false);
-    const [isTransitioning, setIsTransitioning] = useState(false);
     const carouselRef = useRef(null);
+
+    const screenshots = useMemo(() => [
+        { src: "/img/UI (1).png", alt: "UI Screenshot 1" },
+        { src: "/img/UI (2).png", alt: "UI Screenshot 2" },
+        { src: "/img/UI (3).png", alt: "UI Screenshot 3" },
+        { src: "/img/UI (4).png", alt: "UI Screenshot 4" },
+        { src: "/img/UI (5).png", alt: "UI Screenshot 5" },
+        { src: "/img/UI (6).png", alt: "UI Screenshot 6" },
+        { src: "/img/UI (7).png", alt: "UI Screenshot 7" },
+        { src: "/img/UI (8).png", alt: "UI Screenshot 8" },
+        { src: "/img/UI (9).png", alt: "UI Screenshot 9" },
+        { src: "/img/UI (10).png", alt: "UI Screenshot 10" },
+        { src: "/img/UI (11).png", alt: "UI Screenshot 11" },
+        { src: "/img/UI (12).png", alt: "UI Screenshot 12" },
+        { src: "/img/UI (13).png", alt: "UI Screenshot 13" },
+        { src: "/img/UI (14).png", alt: "UI Screenshot 14" },
+    ], []);
 
     useEffect(() => {
         AOS.init({
@@ -42,9 +41,39 @@ const Home = () => {
         return () => clearInterval(autoPlay);
     }, [currentIndex]);
 
+    const updateCarouselPositions = () => {
+        if (!carouselRef.current) return;
+
+        const carousel = carouselRef.current;
+        const slides = carousel.querySelectorAll('.carousel-slide');
+
+        slides.forEach((slide, index) => {
+            const offset = index - currentIndex;
+            const absOffset = Math.abs(offset);
+
+            const transform = offset === 0
+                ? 'translateX(0) translateZ(0) rotateY(0deg)'
+                : offset > 0
+                    ? `translateX(${Math.min(offset * 60, 200)}px) translateZ(-${absOffset * 100}px) rotateY(-${Math.min(offset * 15, 45)}deg)`
+                    : `translateX(${Math.max(offset * 60, -200)}px) translateZ(-${absOffset * 100}px) rotateY(-${Math.max(offset * 15, -45)}deg)`;
+
+            const opacity = absOffset > 3 ? 0 : Math.max(0.3, 1 - absOffset * 0.3);
+            const filter = `blur(${Math.min(absOffset * 2, 6)}px)`;
+            const zIndex = screenshots.length - absOffset;
+            const visibility = absOffset > 3 ? 'hidden' : 'visible';
+
+            slide.style.transform = transform;
+            slide.style.opacity = opacity;
+            slide.style.filter = filter;
+            slide.style.zIndex = zIndex;
+            slide.style.visibility = visibility;
+        });
+    };
+    
     useEffect(() => {
-        updateCarouselPositions();
+        requestAnimationFrame(updateCarouselPositions);
     }, [currentIndex]);
+
 
     useEffect(() => {
         const fetchChangelog = async () => {
@@ -64,75 +93,18 @@ const Home = () => {
         fetchChangelog();
     }, []);
 
-    const updateCarouselPositions = () => {
-        if (!carouselRef.current) return;
-        
-        const carousel = carouselRef.current;
-        const slides = carousel.querySelectorAll('.carousel-slide');
-        
-        carousel.classList.add('smooth');
-        
-        slides.forEach((slide, index) => {
-            const offset = index - currentIndex;
-            const absOffset = Math.abs(offset);
-            
-            let transform = '';
-            let opacity = 1;
-            let filter = 'none';
-            let zIndex = screenshots.length - absOffset;
-            
-            if (offset === 0) {
-                transform = 'translateX(0) translateZ(0) rotateY(0deg)';
-                opacity = 1;
-                filter = 'none';
-                zIndex = screenshots.length;
-            } else if (offset > 0) {
-                const translateX = Math.min(offset * 60, 200);
-                const rotateY = Math.min(offset * 15, 45);
-                transform = `translateX(${translateX}px) translateZ(-${absOffset * 100}px) rotateY(-${rotateY}deg)`;
-                opacity = Math.max(0.3, 1 - absOffset * 0.3);
-                filter = `blur(${Math.min(absOffset * 2, 6)}px)`;
-            } else {
-                const translateX = Math.max(offset * 60, -200);
-                const rotateY = Math.max(offset * 15, -45);
-                transform = `translateX(${translateX}px) translateZ(-${absOffset * 100}px) rotateY(-${rotateY}deg)`;
-                opacity = Math.max(0.3, 1 - absOffset * 0.3);
-                filter = `blur(${Math.min(absOffset * 2, 6)}px)`;
-            }
-            
-            if (absOffset > 3) {
-                opacity = 0;
-                slide.style.visibility = 'hidden';
-            } else {
-                slide.style.visibility = 'visible';
-            }
-            
-            slide.style.transform = transform;
-            slide.style.opacity = opacity;
-            slide.style.filter = filter;
-            slide.style.zIndex = zIndex;
-        });
-    };
-
     const handlePrev = () => {
-        if (isTransitioning) return;
-        setIsTransitioning(true);
         setCurrentIndex(prevIndex => (prevIndex === 0 ? screenshots.length - 1 : prevIndex - 1));
-        setTimeout(() => setIsTransitioning(false), 600);
     };
 
     const handleNext = () => {
-        if (isTransitioning) return;
-        setIsTransitioning(true);
         setCurrentIndex(prevIndex => (prevIndex === screenshots.length - 1 ? 0 : prevIndex + 1));
-        setTimeout(() => setIsTransitioning(false), 600);
     };
 
     const goToSlide = (index) => {
-        if (isTransitioning || index === currentIndex) return;
-        setIsTransitioning(true);
-        setCurrentIndex(index);
-        setTimeout(() => setIsTransitioning(false), 600);
+        if (index !== currentIndex) {
+            setCurrentIndex(index);
+        }
     };
 
     return (
@@ -187,47 +159,44 @@ const Home = () => {
                             Discover the elegant and intuitive interface that makes Horizon Droid a joy to use every day.
                         </p>
                     </div>
-                    
+
                     <div className="carousel" ref={carouselRef} data-aos="fade-up">
                         {screenshots.map((screenshot, index) => (
-                            <div 
-                                key={index} 
+                            <div
+                                key={index}
                                 className="carousel-slide"
                                 onClick={() => goToSlide(index)}
                                 style={{ cursor: index !== currentIndex ? 'pointer' : 'default' }}
                             >
-                                <img 
-                                    src={screenshot.src} 
-                                    alt={screenshot.alt} 
+                                <img
+                                    src={screenshot.src}
+                                    alt={screenshot.alt}
                                     loading="lazy"
                                 />
                             </div>
                         ))}
-                        
+
                         <div className="nav">
-                            <button 
-                                onClick={handlePrev} 
-                                disabled={isTransitioning}
+                            <button
+                                onClick={handlePrev}
                                 aria-label="Previous Screenshot"
                             >
                                 <i className="fas fa-chevron-left"></i>
                             </button>
-                            <button 
-                                onClick={handleNext} 
-                                disabled={isTransitioning}
+                            <button
+                                onClick={handleNext}
                                 aria-label="Next Screenshot"
                             >
                                 <i className="fas fa-chevron-right"></i>
                             </button>
                         </div>
-                        
+
                         <div className="pagination">
                             {screenshots.map((_, index) => (
                                 <button
                                     key={index}
                                     className={`dot ${index === currentIndex ? 'active' : ''}`}
                                     onClick={() => goToSlide(index)}
-                                    disabled={isTransitioning}
                                     aria-label={`Go to screenshot ${index + 1}`}
                                 />
                             ))}
@@ -240,9 +209,9 @@ const Home = () => {
                     <div className="changelog-wrapper" data-aos="fade-up">
                         <p>Stay up to date with the latest improvements, features, and bug fixes. We're constantly evolving to bring you the best custom ROM experience possible.</p>
                         <div className="changelog-box">
-                            <h3 
-                                id="changelog-toggle" 
-                                onClick={() => setIsChangelogExpanded(!isChangelogExpanded)} 
+                            <h3
+                                id="changelog-toggle"
+                                onClick={() => setIsChangelogExpanded(!isChangelogExpanded)}
                                 className={isChangelogExpanded ? 'expanded' : ''}
                             >
                                 <span>📋 Latest Changelog</span>
@@ -251,8 +220,8 @@ const Home = () => {
                             <div id="changelog-container" className={isChangelogExpanded ? 'expanded' : ''}>
                                 <div id="changelog-content" dangerouslySetInnerHTML={{ __html: changelogHtml }} />
                                 <div className="changelog-link">
-                                    <a 
-                                        href="https://github.com/HorizonV2/horizon_changelogs/tree/lineage-22.2" 
+                                    <a
+                                        href="https://github.com/HorizonV2/horizon_changelogs/tree/lineage-22.2"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >

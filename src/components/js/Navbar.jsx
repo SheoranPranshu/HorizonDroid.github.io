@@ -6,19 +6,14 @@ const Navbar = () => {
   const [menuActive, setMenuActive] = useState(false);
 
   useEffect(() => {
-    if (menuActive) {
-      document.body.classList.add('menu-active');
-    } else {
-      document.body.classList.remove('menu-active');
-    }
-
+    document.body.classList.toggle('menu-active', menuActive);
     return () => {
       document.body.classList.remove('menu-active');
     };
   }, [menuActive]);
 
   const toggleMenu = () => {
-    setMenuActive(!menuActive);
+    setMenuActive(prev => !prev);
   };
 
   const closeMenu = () => {
@@ -31,55 +26,54 @@ const Navbar = () => {
         setMenuActive(false);
       }
     };
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
-  useEffect(() => {
     const handleEscape = (event) => {
-      if (event.key === 'Escape' && menuActive) {
+      if (event.key === 'Escape') {
         setMenuActive(false);
       }
     };
 
+    window.addEventListener('resize', handleResize);
     document.addEventListener('keydown', handleEscape);
-    return () => document.removeEventListener('keydown', handleEscape);
-  }, [menuActive]);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, []);
+
 
   return (
     <>
-      {/* Desktop Navbar */}
       <nav className="desktop-navbar" role="navigation" aria-label="Main navigation">
         <div className="desktop-navbar-content">
-          <NavLink 
-            to="/" 
+          <NavLink
+            to="/"
             className="desktop-logo"
             aria-label="HorizonDroid Home"
           >
             <img src="/img/logo.png" alt="HorizonDroid Logo" />
             <span>HorizonDroid</span>
           </NavLink>
-          
+
           <div className="desktop-nav">
-            <NavLink 
-              to="/" 
+            <NavLink
+              to="/"
               className={({ isActive }) => isActive ? 'active' : ''}
               aria-label="Home"
             >
               <i className="fas fa-home" aria-hidden="true"></i>
               <span>Home</span>
             </NavLink>
-            <NavLink 
-              to="/devices" 
+            <NavLink
+              to="/devices"
               className={({ isActive }) => isActive ? 'active' : ''}
               aria-label="Devices"
             >
               <i className="fas fa-download" aria-hidden="true"></i>
               <span>Devices</span>
             </NavLink>
-            <NavLink 
-              to="/build" 
+            <NavLink
+              to="/build"
               className={({ isActive }) => isActive ? 'active' : ''}
               aria-label="Build"
             >
@@ -90,19 +84,18 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Mobile Header */}
       <header className="mobile-header" role="banner">
         <div className="mobile-header-content">
-          <NavLink 
-            to="/" 
-            className="mobile-logo" 
+          <NavLink
+            to="/"
+            className="mobile-logo"
             onClick={closeMenu}
             aria-label="HorizonDroid Home"
           >
             <img src="/img/logo.png" alt="HorizonDroid Logo" />
             HorizonDroid
           </NavLink>
-          <button 
+          <button
             className={`hamburger ${menuActive ? 'active' : ''}`}
             onClick={toggleMenu}
             aria-label={menuActive ? 'Close menu' : 'Open menu'}
@@ -116,18 +109,17 @@ const Navbar = () => {
         </div>
       </header>
 
-      {/* Mobile Sidebar */}
-      <aside 
-        className="sidebar" 
-        role="navigation" 
+      <aside
+        className={`sidebar ${menuActive ? 'active' : ''}`}
+        role="navigation"
         aria-label="Mobile navigation"
         id="mobile-sidebar"
         aria-hidden={!menuActive}
       >
         <div className="sidebar-header">
-          <NavLink 
-            to="/" 
-            className="sidebar-logo" 
+          <NavLink
+            to="/"
+            className="sidebar-logo"
             onClick={closeMenu}
             aria-label="HorizonDroid Home"
           >
@@ -137,8 +129,8 @@ const Navbar = () => {
         </div>
 
         <nav className="sidebar-nav">
-          <NavLink 
-            to="/" 
+          <NavLink
+            to="/"
             onClick={closeMenu}
             className={({ isActive }) => isActive ? 'active' : ''}
             aria-label="Home"
@@ -146,8 +138,8 @@ const Navbar = () => {
             <i className="fas fa-home" aria-hidden="true"></i>
             <span>Home</span>
           </NavLink>
-          <NavLink 
-            to="/devices" 
+          <NavLink
+            to="/devices"
             onClick={closeMenu}
             className={({ isActive }) => isActive ? 'active' : ''}
             aria-label="Devices"
@@ -155,8 +147,8 @@ const Navbar = () => {
             <i className="fas fa-download" aria-hidden="true"></i>
             <span>Devices</span>
           </NavLink>
-          <NavLink 
-            to="/build" 
+          <NavLink
+            to="/build"
             onClick={closeMenu}
             className={({ isActive }) => isActive ? 'active' : ''}
             aria-label="Build"
@@ -171,16 +163,13 @@ const Navbar = () => {
         </div>
       </aside>
 
-      {/* Overlay for mobile menu */}
       {menuActive && (
-        <div 
-          className="sidebar-overlay" 
+        <div
+          className="sidebar-overlay"
           onClick={closeMenu}
           aria-hidden="true"
         />
       )}
-
- 
     </>
   );
 };

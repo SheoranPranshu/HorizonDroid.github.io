@@ -49,6 +49,7 @@
     height: auto;
     animation: float 3s ease-in-out infinite;
     filter: drop-shadow(0 0 30px rgba(110, 0, 200, 0.6));
+    will-change: transform;
 }
 
 .features {
@@ -69,6 +70,7 @@
     box-shadow: 0 15px 40px rgba(110, 0, 200, 0.15);
     position: relative;
     overflow: hidden;
+    will-change: transform, box-shadow;
 }
 
 .feature-card::before {
@@ -79,7 +81,7 @@
     width: 100%;
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(110, 0, 200, 0.1), transparent);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .feature-card:hover {
@@ -97,6 +99,7 @@
     margin-bottom: 20px;
     color: #6E00C8;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
 }
 
 .feature-card:hover .feature-icon {
@@ -192,30 +195,10 @@
     max-width: 100%;
 }
 
-#screenshots .carousel.smooth .carousel-track {
-    will-change: transform;
-}
-
-#screenshots .carousel.smooth .carousel-slide {
-    visibility: visible !important;
-    will-change: transform, opacity, filter;
-    backface-visibility: hidden;
-    transform-style: preserve-3d;
-    transition:
-        transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-        opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
-        filter 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-#screenshots .carousel.smooth .carousel-slide img {
-    will-change: transform, opacity;
-}
-
 #screenshots .carousel-slide {
     position: absolute;
     transform-origin: center center;
-    transition:
-        transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
         opacity 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94),
         filter 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     width: var(--shot-w);
@@ -227,6 +210,7 @@
     border-radius: 24px;
     overflow: hidden;
     border: 1px solid rgba(110, 0, 200, 0.3);
+    will-change: transform, opacity, filter, visibility;
 }
 
 #screenshots .carousel-slide img {
@@ -236,15 +220,14 @@
     object-position: top center;
     border-radius: 23px;
     display: block;
-    box-shadow: 
-        0 20px 40px rgba(110, 0, 200, 0.35),
+    box-shadow: 0 20px 40px rgba(110, 0, 200, 0.35),
         0 0 0 1px rgba(110, 0, 200, 0.2) inset;
-    transition: all 0.3s ease;
+    transition: box-shadow 0.3s ease;
+    will-change: box-shadow;
 }
 
 #screenshots .carousel-slide:hover img {
-    box-shadow: 
-        0 25px 50px rgba(110, 0, 200, 0.5),
+    box-shadow: 0 25px 50px rgba(110, 0, 200, 0.5),
         0 0 0 2px rgba(110, 0, 200, 0.4) inset;
 }
 
@@ -275,6 +258,7 @@
     font-size: 1.5rem;
     border: 1px solid rgba(110, 0, 200, 0.3);
     box-shadow: 0 8px 25px rgba(110, 0, 200, 0.2);
+    will-change: transform, background, border-color, box-shadow;
 }
 
 #screenshots .nav button:hover {
@@ -312,6 +296,7 @@
     cursor: pointer;
     transition: all 0.3s ease;
     border: none;
+    will-change: background, transform;
 }
 
 #screenshots .pagination .dot:focus-visible {
@@ -397,6 +382,7 @@
     border-radius: 12px;
     border: 1px solid rgba(110, 0, 200, 0.3);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, background, box-shadow;
 }
 
 #changelog-toggle:hover {
@@ -410,6 +396,7 @@
     display: inline-block;
     font-size: 1.2rem;
     color: #C40086;
+    will-change: transform;
 }
 
 #changelog-toggle.expanded #toggle-icon {
@@ -426,7 +413,7 @@
     max-height: 5000px;
 }
 
-#changelog-content { 
+#changelog-content {
     color: #ffffff;
     line-height: 1.7;
     padding: 20px;
@@ -469,7 +456,7 @@
     border-left: 4px solid #6E00C8;
 }
 
-#changelog-content a { 
+#changelog-content a {
     color: #6E00C8;
     text-decoration: none;
     font-weight: 500;
@@ -513,12 +500,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-    #screenshots .carousel.smooth .carousel-slide {
-        transition:
-            transform 0s linear,
-            opacity 200ms linear,
-            filter 200ms linear;
-    }
     .feature-card,
     .logo-large {
         transition: none;
@@ -527,12 +508,12 @@
 }
 
 @media (max-width: 992px) {
-    #screenshots .carousel { 
-        height: 500px; 
+    #screenshots .carousel {
+        height: 500px;
     }
-    #screenshots { 
-        --shot-w: 240px; 
-        --shot-h: 480px; 
+    #screenshots {
+        --shot-w: 240px;
+        --shot-h: 480px;
     }
     #screenshots .nav button {
         width: 45px;
@@ -579,12 +560,12 @@
 }
 
 @media (max-width: 768px) {
-    #screenshots .carousel { 
-        height: 420px; 
+    #screenshots .carousel {
+        height: 420px;
     }
-    #screenshots { 
-        --shot-w: 200px; 
-        --shot-h: 420px; 
+    #screenshots {
+        --shot-w: 200px;
+        --shot-h: 420px;
     }
     #screenshots .nav button {
         width: 40px;
@@ -614,12 +595,12 @@
 }
 
 @media (max-width: 480px) {
-    #screenshots .carousel { 
-        height: 380px; 
+    #screenshots .carousel {
+        height: 380px;
     }
-    #screenshots { 
-        --shot-w: 180px; 
-        --shot-h: 380px; 
+    #screenshots {
+        --shot-w: 180px;
+        --shot-h: 380px;
     }
     #screenshots .nav button {
         width: 35px;
