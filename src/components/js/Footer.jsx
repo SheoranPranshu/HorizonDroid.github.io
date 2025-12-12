@@ -7,10 +7,7 @@ const Footer = () => {
       <div className="container">
         <div className="great-day">Have a Great Day!</div>
         <div className="credit">
-          Made with ❤️ by
-          <a href="https://glitchwraith.vercel.app/" target="_blank" rel="noopener noreferrer">
-            Glitch Wraith
-          </a>
+          Made with ❤️ by Horizon Droid Team
         </div>
       </div>
     </footer>
