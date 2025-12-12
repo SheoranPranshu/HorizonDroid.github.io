@@ -1,30 +1,31 @@
 :root {
-    --primary: #6E00C8;
-    --secondary: #C40086;
-    --accent: #12104A;
+    --primary: #8B5CF6;
+    --secondary: #A78BFA;
+    --accent: #1A1A1D;
     --success: #10b981;
     --warning: #f59e0b;
     --danger: #ef4444;
 
-    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-fast: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-fast: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
     
-    --gradient-purple: linear-gradient(135deg, #6E00C8 0%, #C40086 100%);
-    --gradient-purple-hover: linear-gradient(135deg, #5A0099 0%, #9A006B 100%);
-    --gradient-purple-light: rgba(110, 0, 200, 0.1);
+    --gradient-purple: linear-gradient(135deg, #8B5CF6 0%, #A78BFA 100%);
+    --gradient-purple-hover: linear-gradient(135deg, #7C3AED 0%, #8B5CF6 100%);
+    --gradient-glow: rgba(139, 92, 246, 0.15);
 }
 
 body {
-    --bg-primary: #000000;
-    --bg-secondary: #111111;
-    --bg-gradient: linear-gradient(135deg, #000000 0%, #111111 50%, #0a0a0a 100%);
-    --text-primary: #ffffff;
-    --text-secondary: #e0e0e0;
-    --text-muted: #a0a0a0;
-    --border-color: #333333;
-    --card-bg: rgba(17, 17, 17, 0.95);
-    --card-border: rgba(110, 0, 200, 0.2);
-    --card-shadow: 0 15px 40px rgba(110, 0, 200, 0.3);
+    --bg-primary: #0B0B0D;
+    --bg-secondary: #1A1A1D;
+    --bg-gradient: #0B0B0D;
+    --text-primary: #F3F4F6;
+    --text-secondary: #D1D5DB;
+    --text-muted: #9CA3AF;
+    --border-color: #27272A;
+    --card-bg: #1A1A1D;
+    --card-border: rgba(139, 92, 246, 0.2);
+    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+    --glow-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
 }
 
 * {
@@ -37,12 +38,12 @@ body {
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: var(--bg-gradient);
+    background: var(--bg-primary);
     color: var(--text-primary);
     min-height: 100vh;
     line-height: 1.6;
     overflow-x: hidden;
-    transition: var(--transition);
+    transition: background-color 0.2s ease;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -85,9 +86,10 @@ h1, h2, h3, h4, h5, h6 {
     left: 50%;
     transform: translateX(-50%);
     width: 100px;
-    height: 4px;
+    height: 3px;
     background: var(--gradient-purple);
     border-radius: 2px;
+    box-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
 }
 
 .btn {
@@ -96,53 +98,34 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: center;
     gap: 10px;
     background: var(--gradient-purple);
-    color: white !important;
-    padding: 16px 36px;
-    border-radius: 16px;
+    color: #ffffff !important;
+    padding: 14px 32px;
+    border-radius: 12px;
     text-decoration: none;
     font-weight: 600;
-    font-size: 1.05rem;
+    font-size: 1rem;
     transition: var(--transition);
-    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     cursor: pointer;
-    box-shadow: 0 8px 25px rgba(110, 0, 200, 0.4);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
     position: relative;
     overflow: hidden;
     letter-spacing: 0.025em;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: var(--transition);
 }
 
 .btn:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 0 20px rgba(110, 0, 200, 0.6), 0 12px 35px rgba(196, 0, 134, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
     background: var(--gradient-purple-hover);
-    text-decoration: none;
-    color: white !important;
     border-color: rgba(255, 255, 255, 0.2);
 }
 
-.btn:hover::before {
-    left: 100%;
-}
-
 .btn:active {
-    transform: translateY(-1px);
-    transition: var(--transition-fast);
+    transform: translateY(0);
 }
 
 .btn:focus-visible {
-    outline: 2px solid var(--primary);
+    outline: 2px solid var(--secondary);
     outline-offset: 2px;
 }
 

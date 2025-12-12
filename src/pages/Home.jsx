@@ -28,9 +28,9 @@ const Home = () => {
 
     useEffect(() => {
         AOS.init({
-            duration: 800,
+            duration: 600,
             once: true,
-            offset: 100
+            offset: 50
         });
     }, []);
 
@@ -58,13 +58,11 @@ const Home = () => {
                     : `translateX(${Math.max(offset * 60, -200)}px) translateZ(-${absOffset * 100}px) rotateY(-${Math.max(offset * 15, -45)}deg)`;
 
             const opacity = absOffset > 3 ? 0 : Math.max(0.3, 1 - absOffset * 0.3);
-            const filter = `blur(${Math.min(absOffset * 2, 6)}px)`;
             const zIndex = screenshots.length - absOffset;
             const visibility = absOffset > 3 ? 'hidden' : 'visible';
 
             slide.style.transform = transform;
             slide.style.opacity = opacity;
-            slide.style.filter = filter;
             slide.style.zIndex = zIndex;
             slide.style.visibility = visibility;
         });
@@ -118,32 +116,6 @@ const Home = () => {
                     </div>
                     <div className="hero-image" data-aos="fade-left">
                         <img src="/img/logo.png" alt="Horizon Droid Logo" className="logo-large" />
-                    </div>
-                </section>
-
-                <section className="section">
-                    <h2 className="section-title" data-aos="fade-up">Why Choose Horizon?</h2>
-                    <div className="features">
-                        <div className="feature-card" data-aos="fade-up" data-aos-delay="100">
-                            <div className="feature-icon"><i className="fas fa-shield-check"></i></div>
-                            <h3>Pure & Clean</h3>
-                            <p>Experience Android without the bloat. Every component is carefully selected to deliver a pristine, fast, and reliable system that respects your device's potential.</p>
-                        </div>
-                        <div className="feature-card" data-aos="fade-up" data-aos-delay="200">
-                            <div className="feature-icon"><i className="fas fa-rocket"></i></div>
-                            <h3>Performance First</h3>
-                            <p>Refined memory management, Optimized Source, and intelligent resource allocation ensure your device runs smoother and faster than ever before.</p>
-                        </div>
-                        <div className="feature-card" data-aos="fade-up" data-aos-delay="300">
-                            <div className="feature-icon"><i className="fas fa-palette"></i></div>
-                            <h3>Beautiful Design</h3>
-                            <p>Thoughtfully designed interface with smooth animations, consistent theming, and attention to detail that makes every interaction delightful.</p>
-                        </div>
-                        <div className="feature-card" data-aos="fade-up" data-aos-delay="400">
-                            <div className="feature-icon"><i className="fas fa-cogs"></i></div>
-                            <h3>Smart Features</h3>
-                            <p>Innovative customizations and productivity enhancements that you won't find anywhere else, all designed to make your device truly yours.</p>
-                        </div>
                     </div>
                 </section>
 
